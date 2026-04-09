@@ -109,7 +109,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter','Segoe UI',sans-
   <div class="cc">
     <div class="ct">Leads Gerados vs Perdidos por Dia</div>
     <div class="cs">Comparativo diário de geração e descarte &nbsp;·&nbsp; Taxa média de perda: <strong id="loss-avg" style="color:var(--red)"></strong></div>
-    <canvas id="ch-daily" height="150"></canvas>
+    <div class="ch-wrap" style="height:200px"><canvas id="ch-daily"></canvas></div>
   </div>
 </div>
 
@@ -135,6 +135,20 @@ body{background:var(--bg);color:var(--text);font-family:'Inter','Segoe UI',sans-
     <div class="cs">Reuniões não realizadas (por quem agendou)</div>
     <div class="ch-wrap" style="height:280px"><canvas id="ch-sdr-ns"></canvas></div>
   </div>
+</div>
+
+<div class="st" style="--accent:#f59e0b">Pace de SDRs — Meta 70 RE por SDR</div>
+<div class="cc g1">
+  <div class="ct">Realizadas + Futuras vs Meta (70) — Ideal hoje: <span id="closer-ideal-span"></span></div>
+  <div class="cs">Verde = RE realizadas (reuniões que o SDR agendou e aconteceram) · Roxo = futuras agendadas · Cinza = gap até meta 70 · Linha laranja = ideal hoje</div>
+  <div class="ch-wrap" style="height:340px"><canvas id="ch-closer-meta"></canvas></div>
+</div>
+
+<div class="st" style="--accent:var(--green)">Pace de Closers — Meta 40 RE por Closer</div>
+<div class="cc g1">
+  <div class="ct">Realizadas + Futuras vs Meta (40) — Ideal hoje: <span id="closer40-ideal-span"></span></div>
+  <div class="cs">Verde = RE realizadas · Roxo = futuras agendadas · Cinza = gap até meta 40 · Linha laranja = ideal hoje</div>
+  <div class="ch-wrap" style="height:480px"><canvas id="ch-closer-meta40"></canvas></div>
 </div>
 
 <div class="st" style="--accent:var(--green)">Closers — Agendamentos, Reuniões Futuras, Realizadas e No Shows</div>
@@ -201,7 +215,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter','Segoe UI',sans-
 </div>
 
 <script>
-const D = {"today": "2026-04-08", "updated": "08/04/2026 18:07", "days_done": 6, "days_left": 14, "total_days": 20, "metas": {"leads": 9247, "ag": 903, "re": 600}, "totais": {"leads": 719, "ag": 111, "re": 58, "ns": 27, "perdidos": 712, "ag_fut": 48}, "ideal_hoje": {"leads": 2774, "ag": 271, "re": 180}, "pace_proj": {"leads": 2876, "ag": 370, "re": 193}, "ritmo_diario": {"leads": 609, "ag": 57, "re": 39}, "pace_atual": {"leads": 144, "ag": 18.5, "re": 9.7}, "labels": ["01/04", "02/04", "03/04", "06/04", "07/04", "08/04", "09/04", "10/04", "13/04", "14/04", "15/04", "16/04", "17/04", "22/04", "23/04", "24/04", "27/04", "28/04", "29/04", "30/04"], "series": {"leads": [139, 289, 449, 631, 719, 719, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "leads_target": [462, 925, 1387, 1849, 2312, 2774, 3236, 3699, 4161, 4624, 5086, 5548, 6011, 6473, 6935, 7398, 7860, 8322, 8785, 9247], "ag": [21, 49, 49, 77, 102, 111, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "ag_target": [45, 90, 135, 181, 226, 271, 316, 361, 406, 452, 497, 542, 587, 632, 677, 722, 768, 813, 858, 903], "re": [13, 22, 22, 38, 54, 58, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "re_target": [30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360, 390, 420, 450, 480, 510, 540, 570, 600], "perdidos": [36, 93, 94, 505, 671, 705, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "leads_daily": [139, 150, 160, 182, 88, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "perdidos_daily": [36, 57, 1, 411, 166, 34, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "loss_rate": [25.9, 38.0, 0.6, 225.8, 188.6, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "perdidos_SA": [14, 35, 36, 232, 292, 306, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "perdidos_SF": [19, 46, 46, 239, 322, 334, null, null, null, null, null, null, null, null, null, null, null, null, null, null], "perdidos_PJ360": [3, 11, 11, 30, 47, 55, null, null, null, null, null, null, null, null, null, null, null, null, null, null]}, "ag_by_sdr": {"Lorenzo Meneghetti": 25, "Izadora Zacker": 15, "Mélodi Nirvana": 14, "Jonatans Junior": 13, "João Gabriel Dutra": 11, "Leonardo Soares": 11, "Andriely Oliveira": 10, "Henri Meneghetti": 7, "Jhully Soares": 4, "Samuel Almeida": 1}, "ag_by_closer": {"Lorenzo Meneghetti": 10, "Mélodi Nirvana": 10, "Andriely Oliveira": 9, "Gabriela Cunha": 9, "Leonardo Soares": 8, "João Gabriel Dutra": 6, "Jonatans Junior": 6, "Henri Meneghetti": 6, "Izadora Zacker": 6, "Émerson Cavitchoni": 5, "William Dias": 4, "Raissa Antunes": 4, "Andresa Caldas": 4, "Jhully Soares": 2, "Samuel Almeida": 2}, "ag_by_product": {"SF": 20, "PJ360": 32, "SA": 46, "GS": 13}, "ag_sdr_prod": {"João Gabriel Dutra": {"SF": 2, "PJ360": 3, "SA": 5, "GS": 1}, "Andriely Oliveira": {"PJ360": 5, "SF": 2, "SA": 3}, "Lorenzo Meneghetti": {"PJ360": 5, "SF": 8, "SA": 7, "GS": 5}, "Jonatans Junior": {"SA": 5, "PJ360": 8}, "Jhully Soares": {"PJ360": 2, "SA": 1, "GS": 1}, "Samuel Almeida": {"GS": 1}, "Henri Meneghetti": {"SA": 3, "SF": 3, "GS": 1}, "Leonardo Soares": {"SA": 8, "SF": 1, "PJ360": 2}, "Izadora Zacker": {"SA": 8, "PJ360": 3, "SF": 3, "GS": 1}, "Mélodi Nirvana": {"SA": 6, "GS": 3, "PJ360": 4, "SF": 1}}, "ag_closer_prod": {"João Gabriel Dutra": {"SF": 2, "PJ360": 2, "SA": 1, "GS": 1}, "Andriely Oliveira": {"PJ360": 6, "SA": 2, "SF": 1}, "Lorenzo Meneghetti": {"PJ360": 3, "SA": 5, "GS": 1, "SF": 1}, "Jonatans Junior": {"SA": 3, "PJ360": 3}, "Felippe Porcella": {"SF": 1}, "Jhully Soares": {"PJ360": 1, "GS": 1}, "Samuel Almeida": {"GS": 1, "SA": 1}, "Henri Meneghetti": {"SA": 3, "SF": 2, "PJ360": 1}, "Leonardo Soares": {"SA": 6, "SF": 1, "PJ360": 1}, "Émerson Cavitchoni": {"SA": 5}, "Mélodi Nirvana": {"SA": 6, "PJ360": 3, "GS": 1}, "William Dias": {"SA": 4}, "Izadora Zacker": {"PJ360": 2, "SA": 3, "SF": 1}, "Jeferson Ludke": {"SF": 2}, "Gabriela Cunha": {"PJ360": 9}, "Raissa Antunes": {"GS": 3, "SA": 1}, "Djulia Silva": {"GS": 2}, "Leonardo Ribeiro": {"SF": 2}, "Andresa Caldas": {"SF": 4}, "Maria Luísa": {"SA": 1, "GS": 1}, "Lorenzo Coronel": {"SA": 2}, "Samuel Brião": {"SF": 1}, "Haynnã": {"GS": 1}, "Adalberto Neto": {"SF": 2}, "Suzanny Mauren Dihelem": {"SA": 2}, "Thuany Ghabril": {"SA": 1}, "Laura Feijó Junqueira": {"GS": 1, "PJ360": 1}}, "re_by_closer": {"Gabriela Cunha": 12, "William Dias": 4, "Émerson Cavitchoni": 4, "Leonardo Ribeiro": 4, "Lorenzo Coronel": 4, "Andresa Caldas": 4, "Adalberto Neto": 4, "Felippe Porcella": 3, "Raissa Antunes": 3, "Samuel Brião": 3, "Suzanny Mauren Dihelem": 3, "Jeferson Ludke": 2, "Djulia Silva": 2, "Maria Luísa": 2, "Thuany Ghabril": 1}, "re_by_sdr": {"Lorenzo Meneghetti": 16, "Izadora Zacker": 14, "Jonatans Junior": 7, "Leonardo Soares": 6, "Mélodi Nirvana": 4, "João Gabriel Dutra": 4, "Henri Meneghetti": 3, "Andriely Oliveira": 3, "Samuel Almeida": 1}, "re_by_product": {"SF": 13, "SA": 22, "GS": 11, "PJ360": 12}, "ns_by_closer": {"Lorenzo Coronel": 5, "Jeferson Ludke": 5, "Émerson Cavitchoni": 4, "Gabriela Cunha": 3, "Adalberto Neto": 2, "Felippe Porcella": 2, "Suzanny Mauren Dihelem": 2, "Samuel Brião": 2, "Thuany Ghabril": 1, "William Dias": 1}, "ns_by_sdr": {"Leonardo Soares": 8, "Lorenzo Meneghetti": 5, "Henri Meneghetti": 3, "Jonatans Junior": 3, "João Gabriel Dutra": 3, "Izadora Zacker": 2, "Andriely Oliveira": 2, "Jhully Soares": 1}, "ag_fut_by_sdr": {"Mélodi Nirvana": 10, "João Gabriel Dutra": 6, "Andriely Oliveira": 6, "Leonardo Soares": 5, "Jonatans Junior": 5, "Henri Meneghetti": 4, "Lorenzo Meneghetti": 4, "Izadora Zacker": 3, "Samuel Almeida": 2, "Jhully Soares": 1, "Leonardo Ribeiro": 1, "Haynnã": 1}, "ag_fut_by_closer": {"Gabriela Cunha": 17, "Thuany Ghabril": 6, "Haynnã": 3, "Leonardo Ribeiro": 3, "Jeferson Ludke": 2, "Samuel Brião": 2, "Émerson Cavitchoni": 2, "Suzanny Mauren Dihelem": 2, "Samuel Almeida": 2, "William Dias": 2, "Lorenzo Coronel": 2, "Adalberto Neto": 1, "Jhully Soares": 1, "Andresa Caldas": 1, "Djulia Silva": 1}, "ag_fut_by_product": {"SA": 30, "PJ360": 11, "GS": 7}, "perdidos_motivo": {"Sem perfil": 486, "Não informado": 61, "Sem Contato": 59, "Perfil Fake": 36, "Sem interesse": 33, "Sem Retorno": 31, "Teste": 2, "Não esta pronto para comprar": 2, "Concorrência escolhida": 1, "Postergou decisão": 1}, "perdidos_campaign": {"lead_lp_agro_abo_05-03": 188, "lead_destino_lp_fiscal_27_03": 75, "lead_lp_fiscal_abo_27_03": 51, "FF | ABO [FORMULARIO DIRETO][FRANQUIA] ABO": 45, "FF | [FORMULARIO DIRETO][DIVERSOS] ABO": 32, "search_cadastro_franquia_12_03": 28, "02 - [FORM DIRETO][ABO]": 27, "[LEAD] [FORM DIRETO][ABO][FULL PUBLIC]": 23, "FF | [CADASTRO][VIDEOS][FF] ABO": 23, "FF | [CADASTRO] [STUDIO AGRO]  [FUNDO FUNIL][2] ABO": 21}, "perdidos_etiqueta": {"Lead Studio Fiscal": 336, "Lead Studio Agro": 310, "Lead PJ360º": 56, "Sem etiqueta": 10}, "loss_rate_avg": 95.8, "qual_rate": 21.4, "q2a_rate": 72.1, "ag2re_rate": 42.0};
+const D = {"today": "2026-04-09", "updated": "09/04/2026 10:11", "days_done": 7, "days_left": 13, "total_days": 20, "metas": {"leads": 17172, "ag": 903, "re": 600}, "totais": {"leads": 1467, "ag": 127, "re": 67, "ns": 39, "perdidos": 944, "ag_fut": 43}, "ideal_hoje": {"leads": 6010, "ag": 316, "re": 210}, "pace_proj": {"leads": 4191, "ag": 363, "re": 191}, "ritmo_diario": {"leads": 1208, "ag": 60, "re": 41}, "pace_atual": {"leads": 210, "ag": 18.1, "re": 9.6}, "ag_fut_ideal": 76, "meta_closer": 70, "closer_ideal_hoje": 24, "closer_proj": {"Gabriela Cunha": 29, "William Dias": 8, "Leonardo Ribeiro": 7, "Thuany Ghabril": 6, "Lorenzo Coronel": 6, "Émerson Cavitchoni": 6, "Andresa Caldas": 6, "Samuel Brião": 5, "Adalberto Neto": 4, "Suzanny Mauren Dihelem": 4, "Raissa Antunes": 4, "Djulia Silva": 4, "Felippe Porcella": 4, "Jeferson Ludke": 4, "Samuel Almeida": 4, "Maria Luísa": 3, "Haynnã": 3, "Bruna Mota": 1, "Laura Feijó Junqueira": 1, "Jhully Soares": 1}, "closer_needed": {"Adalberto Neto": 5, "Thuany Ghabril": 5, "Suzanny Mauren Dihelem": 5, "Leonardo Ribeiro": 5, "Bruna Mota": 5, "William Dias": 5, "Laura Feijó Junqueira": 5, "Raissa Antunes": 5, "Djulia Silva": 5, "Jhully Soares": 5, "Maria Luísa": 5, "Lorenzo Coronel": 5, "Émerson Cavitchoni": 5, "Samuel Brião": 5, "Haynnã": 5, "Felippe Porcella": 5, "Jeferson Ludke": 5, "Andresa Caldas": 5, "Samuel Almeida": 5, "Gabriela Cunha": 4}, "labels": ["01/04", "02/04", "03/04", "06/04", "07/04", "08/04", "09/04", "10/04", "13/04", "14/04", "15/04", "16/04", "17/04", "22/04", "23/04", "24/04", "27/04", "28/04", "29/04", "30/04"], "series": {"leads": [133, 277, 431, 1002, 1106, 1459, 1467, null, null, null, null, null, null, null, null, null, null, null, null, null], "leads_target": [859, 1717, 2576, 3434, 4293, 5152, 6010, 6869, 7727, 8586, 9445, 10303, 11162, 12020, 12879, 13738, 14596, 15455, 16313, 17172], "ag": [21, 49, 49, 77, 102, 125, 127, null, null, null, null, null, null, null, null, null, null, null, null, null], "ag_target": [45, 90, 135, 181, 226, 271, 316, 361, 406, 452, 497, 542, 587, 632, 677, 722, 768, 813, 858, 903], "re": [12, 21, 21, 37, 53, 66, 67, null, null, null, null, null, null, null, null, null, null, null, null, null], "re_target": [30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360, 390, 420, 450, 480, 510, 540, 570, 600], "perdidos": [34, 89, 90, 495, 659, 919, 937, null, null, null, null, null, null, null, null, null, null, null, null, null], "leads_daily": [133, 144, 154, 571, 104, 353, 8, null, null, null, null, null, null, null, null, null, null, null, null, null], "perdidos_daily": [34, 55, 1, 405, 164, 260, 18, null, null, null, null, null, null, null, null, null, null, null, null, null], "loss_rate": [25.6, 38.2, 0.6, 70.9, 157.7, 73.7, 225.0, null, null, null, null, null, null, null, null, null, null, null, null, null], "perdidos_SA": [12, 33, 34, 228, 288, 504, 509, null, null, null, null, null, null, null, null, null, null, null, null, null], "perdidos_SF": [19, 45, 45, 237, 320, 347, 354, null, null, null, null, null, null, null, null, null, null, null, null, null], "perdidos_PJ360": [3, 10, 10, 29, 46, 62, 68, null, null, null, null, null, null, null, null, null, null, null, null, null]}, "ag_by_sdr": {"Lorenzo Meneghetti": 27, "Mélodi Nirvana": 17, "Izadora Zacker": 17, "Jonatans Junior": 15, "João Gabriel Dutra": 14, "Leonardo Soares": 13, "Andriely Oliveira": 10, "Henri Meneghetti": 7, "Jhully Soares": 5, "Samuel Almeida": 2}, "ag_by_closer": {"Mélodi Nirvana": 13, "Lorenzo Meneghetti": 11, "Gabriela Cunha": 11, "João Gabriel Dutra": 9, "Leonardo Soares": 8, "Jonatans Junior": 7, "Izadora Zacker": 7, "Andriely Oliveira": 7, "William Dias": 5, "Henri Meneghetti": 5, "Andresa Caldas": 5, "Émerson Cavitchoni": 5, "Samuel Almeida": 4, "Raissa Antunes": 4, "Jhully Soares": 3}, "ag_by_product": {"SF": 23, "PJ360": 34, "SA": 54, "GS": 16}, "ag_sdr_prod": {"Lorenzo Meneghetti": {"SF": 9, "GS": 6, "PJ360": 4, "SA": 8}, "Jonatans Junior": {"PJ360": 9, "SA": 6}, "Jhully Soares": {"SA": 2, "PJ360": 2, "GS": 1}, "Leonardo Soares": {"SA": 10, "SF": 1, "PJ360": 2}, "João Gabriel Dutra": {"PJ360": 4, "SA": 7, "SF": 2, "GS": 1}, "Mélodi Nirvana": {"GS": 4, "SA": 7, "PJ360": 5, "SF": 1}, "Samuel Almeida": {"GS": 2}, "Izadora Zacker": {"SA": 9, "SF": 4, "PJ360": 3, "GS": 1}, "Andriely Oliveira": {"PJ360": 5, "SF": 2, "SA": 3}, "Henri Meneghetti": {"SA": 2, "SF": 4, "GS": 1}}, "ag_closer_prod": {"Lorenzo Meneghetti": {"SF": 2, "PJ360": 3, "SA": 5, "GS": 1}, "Jonatans Junior": {"PJ360": 4, "SA": 3}, "Jhully Soares": {"SA": 1, "PJ360": 1, "GS": 1}, "Leonardo Soares": {"SA": 6, "SF": 1, "PJ360": 1}, "João Gabriel Dutra": {"PJ360": 3, "SA": 3, "SF": 2, "GS": 1}, "Mélodi Nirvana": {"GS": 2, "SA": 7, "PJ360": 4}, "Samuel Almeida": {"GS": 3, "SA": 1}, "Thuany Ghabril": {"SA": 2}, "Izadora Zacker": {"SA": 4, "SF": 2, "PJ360": 1}, "Andriely Oliveira": {"PJ360": 4, "SA": 2, "SF": 1}, "Suzanny Mauren Dihelem": {"SA": 3}, "Felippe Porcella": {"SF": 1}, "William Dias": {"SA": 5}, "Henri Meneghetti": {"SA": 2, "SF": 2, "PJ360": 1}, "Andresa Caldas": {"SF": 5}, "Laura Feijó Junqueira": {"SA": 1, "GS": 1, "PJ360": 1}, "Gabriela Cunha": {"PJ360": 11}, "Jeferson Ludke": {"SF": 2}, "Émerson Cavitchoni": {"SA": 5}, "Raissa Antunes": {"GS": 3, "SA": 1}, "Djulia Silva": {"GS": 2}, "Leonardo Ribeiro": {"SF": 2}, "Maria Luísa": {"SA": 1, "GS": 1}, "Lorenzo Coronel": {"SA": 2}, "Samuel Brião": {"SF": 1}, "Haynnã": {"GS": 1}, "Adalberto Neto": {"SF": 2}}, "re_by_closer": {"Gabriela Cunha": 15, "Émerson Cavitchoni": 5, "William Dias": 5, "Andresa Caldas": 5, "Leonardo Ribeiro": 5, "Suzanny Mauren Dihelem": 4, "Lorenzo Coronel": 4, "Felippe Porcella": 3, "Raissa Antunes": 3, "Samuel Brião": 3, "Adalberto Neto": 3, "Thuany Ghabril": 2, "Jeferson Ludke": 2, "Djulia Silva": 2, "Maria Luísa": 2}, "re_by_sdr": {"Lorenzo Meneghetti": 19, "Izadora Zacker": 15, "Leonardo Soares": 9, "Jonatans Junior": 8, "Henri Meneghetti": 4, "Mélodi Nirvana": 4, "João Gabriel Dutra": 4, "Andriely Oliveira": 4}, "re_by_product": {"SA": 25, "PJ360": 15, "SF": 13, "GS": 14}, "ns_by_closer": {"Lorenzo Coronel": 7, "Jeferson Ludke": 6, "Gabriela Cunha": 6, "Thuany Ghabril": 4, "Suzanny Mauren Dihelem": 4, "Émerson Cavitchoni": 4, "Samuel Brião": 3, "Adalberto Neto": 2, "Felippe Porcella": 2, "William Dias": 1}, "ns_by_sdr": {"Leonardo Soares": 8, "Jonatans Junior": 5, "João Gabriel Dutra": 5, "Henri Meneghetti": 5, "Lorenzo Meneghetti": 5, "Izadora Zacker": 4, "Mélodi Nirvana": 4, "Andriely Oliveira": 2, "Jhully Soares": 1}, "ag_fut_by_sdr": {"Mélodi Nirvana": 9, "João Gabriel Dutra": 7, "Jonatans Junior": 6, "Leonardo Soares": 5, "Lorenzo Meneghetti": 4, "Andriely Oliveira": 4, "Izadora Zacker": 3, "Jhully Soares": 2, "Henri Meneghetti": 1}, "ag_fut_by_closer": {"Gabriela Cunha": 14, "Thuany Ghabril": 4, "William Dias": 3, "Samuel Almeida": 3, "Djulia Silva": 2, "Samuel Brião": 2, "Jeferson Ludke": 2, "Leonardo Ribeiro": 2, "Lorenzo Coronel": 2, "Haynnã": 2, "Andresa Caldas": 1, "Maria Luísa": 1, "Raissa Antunes": 1, "Felippe Porcella": 1, "Adalberto Neto": 1}, "ag_fut_by_product": {"PJ360": 11, "SA": 25, "GS": 7}, "perdidos_motivo": {"Sem perfil": 670, "Sem Contato": 72, "Não informado": 65, "Perfil Fake": 43, "Sem interesse": 42, "Sem Retorno": 42, "Teste": 4, "Não esta pronto para comprar": 3, "Sem dinheiro": 1, "Concorrência escolhida": 1}, "perdidos_campaign": {"lead_lp_agro_abo_05-03": 193, "[LEAD] [FORMULÁRIO META] [AGRO] [16_03] [03]": 150, "lead_destino_lp_fiscal_27_03": 78, "lead_lp_fiscal_abo_27_03": 52, "FF | ABO [FORMULARIO DIRETO][FRANQUIA] ABO": 46, "[LEAD] [FORMULÁRIO META] [AGRO] [16_03] [04]": 45, "FF | [FORMULARIO DIRETO][DIVERSOS] ABO": 32, "02 - [FORM DIRETO][ABO]": 31, "search_cadastro_franquia_12_03": 28, "[LEAD] [FORM DIRETO][ABO][FULL PUBLIC]": 24}, "perdidos_etiqueta": {"Lead Studio Agro": 513, "Lead Studio Fiscal": 356, "Lead PJ360º": 69, "Sem etiqueta": 6}, "loss_rate_avg": 84.5, "qual_rate": 12.2, "q2a_rate": 70.9, "ag2re_rate": 40.4};
 
 Chart.defaults.color='#8b92a8';
 Chart.defaults.font.family="'Inter','Segoe UI',sans-serif";
@@ -237,7 +251,7 @@ const kCards=[
   {l:'Leads MQL',c:'var(--teal)',a:D.totais.leads,m:D.metas.leads,i:D.ideal_hoje.leads,proj:D.pace_proj.leads,r:D.ritmo_diario.leads,pace:D.pace_atual.leads+'/dia'},
   {l:'Agendamentos CC1',c:'var(--accent)',a:D.totais.ag,m:D.metas.ag,i:D.ideal_hoje.ag,proj:D.pace_proj.ag,r:D.ritmo_diario.ag,pace:D.pace_atual.ag+'/dia'},
   {l:'Realizadas CC1',c:'var(--green)',a:D.totais.re,m:D.metas.re,i:D.ideal_hoje.re,proj:D.pace_proj.re,r:D.ritmo_diario.re,pace:D.pace_atual.re+'/dia'},
-  {l:'AG Futuras',c:'var(--purple)',a:D.totais.ag_fut,m:null,i:null,proj:null,r:null,pace:D.totais.ag_fut+' agendadas'},
+  {l:'AG Futuras',c:'var(--purple)',a:D.totais.ag_fut,m:D.ag_fut_ideal,i:D.ag_fut_ideal,proj:null,r:D.ritmo_diario.ag,pace:D.totais.ag_fut+' agendadas',iLabel:'Pipeline ideal (5d)',rLabel:'Ritmo AG/dia'},
   {l:'Perdidos',c:'var(--red)',a:D.totais.perdidos,m:null,i:null,proj:null,r:null,pace:Math.round(D.totais.perdidos/D.days_done)+'/dia',ns:true},
 ];
 document.getElementById('kgrid').innerHTML=kCards.map(k=>{
@@ -249,9 +263,9 @@ document.getElementById('kgrid').innerHTML=kCards.map(k=>{
     ${fp!==null?`<div class="kp-track"><div class="kp-fill" style="width:${fp}%"></div></div><div class="kpct">${fp}% da meta</div>`:''}
     <div class="kr">
       <div class="krow"><span>Pace atual</span><span class="neutral">${k.pace}</span></div>
-      ${k.i?`<div class="krow"><span>Ideal hoje</span><span>${k.i.toLocaleString('pt-BR')}</span></div>`:''}
+      ${k.i?`<div class="krow"><span>${k.iLabel||'Ideal hoje'}</span><span>${k.i.toLocaleString('pt-BR')}</span></div>`:''}
       ${k.proj?`<div class="krow"><span>Projeção</span><span class="${k.proj>=k.m?'ahead':'behind'}">${k.proj.toLocaleString('pt-BR')}</span></div>`:''}
-      ${k.r?`<div class="krow"><span>Ritmo necessário</span><span class="warn">${k.r}/dia</span></div>`:''}
+      ${k.r?`<div class="krow"><span>${k.rLabel||'Ritmo necessário'}</span><span class="warn">${k.r}/dia</span></div>`:''}
       ${k.ns?`<div class="krow"><span>Taxa de perda</span><span class="behind">${D.loss_rate_avg}% dos leads</span></div>`:''}
       <div class="krow" style="margin-top:4px"><span>Status</span><span class="${sc}">${st}</span></div>
     </div>
@@ -288,9 +302,9 @@ new Chart(document.getElementById('ch-daily'),{
     {label:'Leads',data:D.series.leads_daily,backgroundColor:'#14b8a680',borderColor:'#14b8a6',borderWidth:1},
     {label:'Perdidos',data:D.series.perdidos_daily,backgroundColor:'#ef444480',borderColor:'#ef4444',borderWidth:1}
   ]},
-  options:{responsive:true,maintainAspectRatio:true,
+  options:{responsive:true,maintainAspectRatio:false,
     plugins:{legend:{position:'bottom',labels:{boxWidth:10}},tooltip:{mode:'index'},
-      datalabels:{anchor:'end',align:'top',color:'#e2e8f0',font:{size:9,weight:'bold'},formatter:v=>(v&&v>0)?v:null}},
+      datalabels:{anchor:'end',align:'top',color:'~e2e8f0',font:{size:9,weight:'bold'},formatter:v=>(v&&v>0)?v:null}},
     scales:{x:{grid:{color:'rgba(42,46,66,0.6)'},ticks:{font:{size:10}}},y:{grid:{color:'rgba(42,46,66,0.6)'},beginAtZero:true}}}
 });
 
@@ -301,7 +315,7 @@ function hBar(id,obj,color){
   const maxVal=Math.max(...values);
   new Chart(document.getElementById(id),{
     type:'bar',plugins:[ChartDataLabels],
-    data:{labels,datasets:[{label:'Total',data:values,backgroundColor:color+'99',borderColor:color,borderWidth:1,borderRadius:3}]},
+    data:{labels,datasets:[{label:'Total',data:values,backgroundColor:color('99',borderColor:color,borderWidth:1,borderRadius:3}]},
     options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
       layout:{padding:{right:32,top:4,bottom:4}},
       plugins:{legend:{display:false},tooltip:{mode:'index'},
@@ -315,10 +329,182 @@ function hBar(id,obj,color){
   });
 }
 
+// STACKED HORIZONTAL BAR — pace RE com projeção de futuras
+function hBarStacked(id,lbl1,data1,lbl2,data2,col1,col2){
+  const all=new Set([...Object.keys(data1),...Object.keys(data2)]);
+  const sorted=[...all].sort((a,b)=>{
+    const ta=(data1[a]||0)+(data2[a]||0);
+    const tb=(data1[b]||0)+(data2[b]||0);
+    return ta-tb;
+  });
+  const v1=sorted.map(l=>data1[l]||0);
+  const v2=sorted.map(l=>data2[l]||0);
+  const totals=sorted.map((l,i)=>v1[i]+v2[i]);
+  const maxVal=Math.max(...totals);
+  new Chart(document.getElementById(id),{
+    type:'bar',plugins:[ChartDataLabels],
+    data:{labels:sorted,datasets:[
+      {label:lbl1,data:v1,backgroundColor:col1+'cc',borderColor:col1,borderWidth:1,borderRadius:3},
+      {label:lbl2,data:v2,backgroundColor:col2+'55',borderColor:col2,borderWidth:1,borderRadius:3,borderDash:[]}
+    ]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      layout:{padding:{right:44,top:4,bottom:4}},
+      plugins:{
+        legend:{display:true,position:'top',labels:{color:'#94a3b8',font:{size:11},boxWidth:12,padding:10}},
+        tooltip:{mode:'index'},
+        datalabels:{anchor:'end',align:'right',color:'#e2e8f0',font:{size:10,weight:'bold'},
+          formatter:(v,ctx)=>{
+            if(ctx.datasetIndex===1){
+              return totals[ctx.dataIndex]>0?'→ '+totals[ctx.dataIndex]:null;
+            }
+            return v>0?v:null;
+          },
+          padding:{left:4},clip:false}},
+      scales:{
+        x:{stacked:true,grid:{color:'rgba(42,46,66,0.6)'},beginAtZero:true,ticks:{font:{size:10}},max:maxVal*1.25},
+        y:{stacked:true,grid:{display:false},ticks:{font:{size:10},maxTicksLimit:20}}}}
+  });
+}
+
 hBar('ch-sdr-ag',D.ag_by_sdr,'#6366f1');
 hBar('ch-sdr-agfut',D.ag_fut_by_sdr,'#a855f7');
 hBar('ch-sdr-re',D.re_by_sdr,'#22c55e');
 hBar('ch-sdr-ns',D.ns_by_sdr,'#f59e0b');
+// ── Closer pace vs meta 40 ─────────────────────────────────────────────
+(function(){
+  const META=40, IDEAL=Math.round(META*D.days_done/D.total_days);
+  document.getElementById('closer40-ideal-span').textContent=IDEAL;
+  const allC=new Set([...Object.keys(D.re_by_closer),...Object.keys(D.ag_fut_by_closer)]);
+  const sorted=[...allC].sort((a,b)=>{
+    const ta=(D.re_by_closer[a]||0)+(D.ag_fut_by_closer[a]||0);
+    const tb=(D.re_by_closer[b]||0)+(D.ag_fut_by_closer[b]||0);
+    return ta-tb;
+  });
+  const vRe  =sorted.map(c=>D.re_by_closer[c]||0);
+  const vFut =sorted.map(c=>D.ag_fut_by_closer[c]||0);
+  const vGap =sorted.map((c,i)=>Math.max(0,META-vRe[i]-vFut[i]));
+  const totals=sorted.map((c,i)=>vRe[i]+vFut[i]);
+  const idealLinePlugin={id:'il40',afterDraw(chart){
+    const {ctx,scales:{x}}=chart;
+    const xPos=x.getPixelForValue(IDEAL);
+    ctx.save();ctx.strokeStyle='#f59e0b';ctx.lineWidth=2;ctx.setLineDash([6,3]);
+    ctx.beginPath();ctx.moveTo(xPos,chart.chartArea.top);ctx.lineTo(xPos,chart.chartArea.bottom);ctx.stroke();
+    ctx.fillStyle='#f59e0b';ctx.font='bold 10px sans-serif';
+    ctx.fillText('ideal '+IDEAL,xPos+4,chart.chartArea.top+12);ctx.restore();
+  }};
+  new Chart(document.getElementById('ch-closer-meta40'),{
+    type:'bar',plugins:[ChartDataLabels,idealLinePlugin],
+    data:{labels:sorted,datasets:[
+      {label:'RE Realizadas',data:vRe,backgroundColor:'#22c55ecc',borderColor:'#22c55e',borderWidth:1,borderRadius:2},
+      {label:'Futuras Agendadas',data:vFut,backgroundColor:'#a855f755',borderColor:'#a855f7',borderWidth:1,borderRadius:2},
+      {label:'Gap até meta 40',data:vGap,backgroundColor:'#ffffff11',borderColor:'#ffffff22',borderWidth:1,borderRadius:2}
+    ]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      layout:{padding:{right:50,top:4,bottom:4}},
+      plugins:{
+        legend:{display:true,position:'top',labels:{color:'#94a3b8',font:{size:11},boxWidth:12,padding:10}},
+        tooltip:{mode:'index',callbacks:{footer:items=>{
+          const i=items[0].dataIndex;
+          const needed=Math.max(0,Math.ceil((META-vRe[i])/(D.days_left||1)));
+          return['Projeção: '+totals[i]+' / '+META,'Necessário/dia: '+needed];
+        }}},
+        datalabels:{anchor:'end',align:'right',
+          color:(ctx)=>ctx.datasetIndex===0?'#22c55e':ctx.datasetIndex===1?'#a855f7':'transparent',
+          font:{size:10,weight:'bold'},
+          formatter:(v,ctx)=>{
+            if(ctx.datasetIndex===1){const tot=totals[ctx.dataIndex];return tot>0?'→ '+tot:null;}
+            return v>0?v:null;
+          },padding:{left:4},clip:false}},
+      scales:{
+        x:{stacked:true,grid:{color:'rgba(42,46,66,0.6)'},beginAtZero:true,ticks:{font:{size:10}},max:META+5},
+        y:{stacked:true,grid:{display:false},ticks:{font:{size:10},maxTicksLimit:25}}
+      }
+    }
+  });
+})();
+
+// ── Closer pace vs meta 70 ──────────────────────────────────────────────
+(function(){
+  const META=D.meta_closer, IDEAL=D.closer_ideal_hoje;
+  document.getElementById('closer-ideal-span').textContent=IDEAL;
+  const allC=new Set([...Object.keys(D.re_by_sdr),...Object.keys(D.ag_fut_by_sdr)]);
+  const sorted=[...allC].sort((a,b)=>{
+    const ta=(D.re_by_sdr[a]||0)+(D.ag_fut_by_sdr[a]||0);
+    const tb=(D.re_by_sdr[b]||0)+(D.ag_fut_by_sdr[b]||0);
+    return ta-tb;
+  });
+  const vRe  = sorted.map(c=>D.re_by_sdr[c]||0);
+  const vFut = sorted.map(c=>D.ag_fut_by_sdr[c]||0);
+  const vGap = sorted.map((c,i)=>Math.max(0,META-vRe[i]-vFut[i]));
+  const totals= sorted.map((c,i)=>vRe[i]+vFut[i]);
+
+  // Plugin para linha vertical "ideal hoje"
+  const idealLinePlugin={
+    id:'idealLine',
+    afterDraw(chart){
+      const {ctx,scales:{x,y}}=chart;
+      const xPos=x.getPixelForValue(IDEAL);
+      ctx.save();
+      ctx.strokeStyle='#f59e0b';
+      ctx.lineWidth=2;
+      ctx.setLineDash([6,3]);
+      ctx.beginPath();
+      ctx.moveTo(xPos,chart.chartArea.top);
+      ctx.lineTo(xPos,chart.chartArea.bottom);
+      ctx.stroke();
+      // Label
+      ctx.fillStyle='#f59e0b';
+      ctx.font='bold 10px sans-serif';
+      ctx.fillText('ideal '+IDEAL,xPos+4,chart.chartArea.top+12);
+      ctx.restore();
+    }
+  };
+
+  new Chart(document.getElementById('ch-closer-meta'),{
+    type:'bar',
+    plugins:[ChartDataLabels,idealLinePlugin],
+    data:{
+      labels:sorted,
+      datasets:[
+        {label:'RE Realizadas',data:vRe,backgroundColor:'#22c55ecc',borderColor:'#22c55e',borderWidth:1,borderRadius:2},
+        {label:'Futuras Agendadas',data:vFut,backgroundColor:'#a855f755',borderColor:'#a855f7',borderWidth:1,borderRadius:2},
+        {label:'Gap até meta 70',data:vGap,backgroundColor:'#ffffff11',borderColor:'#ffffff22',borderWidth:1,borderRadius:2}
+      ]
+    },
+    options:{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      layout:{padding:{right:50,top:4,bottom:4}},
+      plugins:{
+        legend:{display:true,position:'top',labels:{color:'#94a3b8',font:{size:11},boxWidth:12,padding:10}},
+        tooltip:{mode:'index',callbacks:{
+          footer:items=>{
+            const i=items[0].dataIndex;
+            const proj=totals[i];
+            const needed=Math.max(0,Math.ceil((META-vRe[i])/(D.days_left||1)));
+            return [`Projeção: ${proj} / ${META}`,`Necessário/dia: ${needed}`];
+          }
+        }},
+        datalabels:{
+          anchor:'end',align:'right',
+          color:(ctx)=>ctx.datasetIndex===0?'#22c55e':ctx.datasetIndex===1?'#a855f7':'transparent',
+          font:{size:10,weight:'bold'},
+          formatter:(v,ctx)=>{
+            if(ctx.datasetIndex===1){
+              const tot=totals[ctx.dataIndex];
+              return tot>0?'→ '+tot:null;
+            }
+            return v>0?v:null;
+          },
+          padding:{left:4},clip:false
+        }
+      },
+      scales:{
+        x:{stacked:true,grid:{color:'rgba(42,46,66,0.6)'},beginAtZero:true,ticks:{font:{size:10}},max:META+8},
+        y:{stacked:true,grid:{display:false},ticks:{font:{size:10},maxTicksLimit:25}}
+      }
+    }
+  });
+})();
 hBar('ch-cl-ag',D.ag_by_closer,'#6366f1');
 hBar('ch-cl-agfut',D.ag_fut_by_closer,'#a855f7');
 hBar('ch-cl-re',D.re_by_closer,'#22c55e');
@@ -377,7 +563,7 @@ new Chart(document.getElementById('ch-camp'),{
   type:'bar',plugins:[ChartDataLabels],
   data:{labels:cKeys,datasets:[{label:'Perdidos',data:cVals,backgroundColor:'#ef444470',borderColor:'#ef4444',borderWidth:1}]},
   options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,layout:{padding:{right:36,top:4,bottom:4}},
-    plugins:{legend:{display:false},datalabels:{anchor:'end',align:'end',color:'#e2e8f0',font:{size:10,weight:'bold'},formatter:v=>v>0?v:null,offset:2}},
+    plugins:{legend:{display:false},datalabels:{anchor:'end',align:'end',color:'~e2e8f0',font:{size:10,weight:'bold'},formatter:v=>v>0?v:null,offset:2}},
     scales:{x:{grid:{color:'rgba(42,46,66,0.6)'},beginAtZero:true,max:230},y:{grid:{display:false},ticks:{font:{size:9}}}}}
 });
 
@@ -385,7 +571,7 @@ new Chart(document.getElementById('ch-camp'),{
 lineChart('ch-perdacu',[
   {label:'Perdidos acum.',data:D.series.perdidos,borderColor:'#ef4444',backgroundColor:'#ef444420',borderWidth:2.5,pointRadius:3,tension:.3,fill:true,spanGaps:false},
   {label:'AG acum.',data:D.series.ag,borderColor:'#6366f1',backgroundColor:'transparent',borderWidth:2,pointRadius:2,tension:.3,fill:false,borderDash:[4,3],spanGaps:false},
-  {label:'Leads acum.',data:D.series.leads,borderColor:'#14b8a6',backgroundColor:'transparent',borderWidth:1.5,pointRadius:2,tension:.3,fill:false,borderDash:[6,4],spanGaps:false}
+  {label:'Leads acum.',data:D.series.leads,borderColor:'~c4b8a6',backgroundColor:'transparent',borderWidth:1.5,pointRadius:2,tension:.3,fill:false,borderDash:[6,4],spanGaps:false}
 ],D.labels);
 
 // ÁREA PERDIDOS POR PRODUTO vs LEADS
