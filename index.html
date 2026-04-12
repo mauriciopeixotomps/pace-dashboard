@@ -212,10 +212,23 @@ body{background:var(--bg);color:var(--text);font-family:'Inter','Segoe UI',sans-
   </div>
 </div>
 
+<div class="g2">
+  <div class="cc">
+    <div class="ct">Leads Gerados vs Perdidos por Produto</div>
+    <div class="cs">Total de leads recebidos e descartados por linha de negócio em Abril</div>
+    <canvas id="ch-prod-compare" height="240"></canvas>
+  </div>
+  <div class="cc">
+    <div class="ct">Taxa de Perda por Produto</div>
+    <div class="cs">% de leads descartados em relação ao total gerado por produto</div>
+    <canvas id="ch-prod-lossrate" height="240"></canvas>
+  </div>
+</div>
+
 </div>
 
 <script>
-const D = {"today": "2026-04-09", "updated": "09/04/2026 10:11", "days_done": 7, "days_left": 13, "total_days": 20, "metas": {"leads": 17172, "ag": 903, "re": 600}, "totais": {"leads": 1467, "ag": 127, "re": 67, "ns": 39, "perdidos": 944, "ag_fut": 43}, "ideal_hoje": {"leads": 6010, "ag": 316, "re": 210}, "pace_proj": {"leads": 4191, "ag": 363, "re": 191}, "ritmo_diario": {"leads": 1208, "ag": 60, "re": 41}, "pace_atual": {"leads": 210, "ag": 18.1, "re": 9.6}, "ag_fut_ideal": 76, "meta_closer": 70, "closer_ideal_hoje": 24, "closer_proj": {"Gabriela Cunha": 29, "William Dias": 8, "Leonardo Ribeiro": 7, "Thuany Ghabril": 6, "Lorenzo Coronel": 6, "Émerson Cavitchoni": 6, "Andresa Caldas": 6, "Samuel Brião": 5, "Adalberto Neto": 4, "Suzanny Mauren Dihelem": 4, "Raissa Antunes": 4, "Djulia Silva": 4, "Felippe Porcella": 4, "Jeferson Ludke": 4, "Samuel Almeida": 4, "Maria Luísa": 3, "Haynnã": 3, "Bruna Mota": 1, "Laura Feijó Junqueira": 1, "Jhully Soares": 1}, "closer_needed": {"Adalberto Neto": 5, "Thuany Ghabril": 5, "Suzanny Mauren Dihelem": 5, "Leonardo Ribeiro": 5, "Bruna Mota": 5, "William Dias": 5, "Laura Feijó Junqueira": 5, "Raissa Antunes": 5, "Djulia Silva": 5, "Jhully Soares": 5, "Maria Luísa": 5, "Lorenzo Coronel": 5, "Émerson Cavitchoni": 5, "Samuel Brião": 5, "Haynnã": 5, "Felippe Porcella": 5, "Jeferson Ludke": 5, "Andresa Caldas": 5, "Samuel Almeida": 5, "Gabriela Cunha": 4}, "labels": ["01/04", "02/04", "03/04", "06/04", "07/04", "08/04", "09/04", "10/04", "13/04", "14/04", "15/04", "16/04", "17/04", "22/04", "23/04", "24/04", "27/04", "28/04", "29/04", "30/04"], "series": {"leads": [133, 277, 431, 1002, 1106, 1459, 1467, null, null, null, null, null, null, null, null, null, null, null, null, null], "leads_target": [859, 1717, 2576, 3434, 4293, 5152, 6010, 6869, 7727, 8586, 9445, 10303, 11162, 12020, 12879, 13738, 14596, 15455, 16313, 17172], "ag": [21, 49, 49, 77, 102, 125, 127, null, null, null, null, null, null, null, null, null, null, null, null, null], "ag_target": [45, 90, 135, 181, 226, 271, 316, 361, 406, 452, 497, 542, 587, 632, 677, 722, 768, 813, 858, 903], "re": [12, 21, 21, 37, 53, 66, 67, null, null, null, null, null, null, null, null, null, null, null, null, null], "re_target": [30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360, 390, 420, 450, 480, 510, 540, 570, 600], "perdidos": [34, 89, 90, 495, 659, 919, 937, null, null, null, null, null, null, null, null, null, null, null, null, null], "leads_daily": [133, 144, 154, 571, 104, 353, 8, null, null, null, null, null, null, null, null, null, null, null, null, null], "perdidos_daily": [34, 55, 1, 405, 164, 260, 18, null, null, null, null, null, null, null, null, null, null, null, null, null], "loss_rate": [25.6, 38.2, 0.6, 70.9, 157.7, 73.7, 225.0, null, null, null, null, null, null, null, null, null, null, null, null, null], "perdidos_SA": [12, 33, 34, 228, 288, 504, 509, null, null, null, null, null, null, null, null, null, null, null, null, null], "perdidos_SF": [19, 45, 45, 237, 320, 347, 354, null, null, null, null, null, null, null, null, null, null, null, null, null], "perdidos_PJ360": [3, 10, 10, 29, 46, 62, 68, null, null, null, null, null, null, null, null, null, null, null, null, null]}, "ag_by_sdr": {"Lorenzo Meneghetti": 27, "Mélodi Nirvana": 17, "Izadora Zacker": 17, "Jonatans Junior": 15, "João Gabriel Dutra": 14, "Leonardo Soares": 13, "Andriely Oliveira": 10, "Henri Meneghetti": 7, "Jhully Soares": 5, "Samuel Almeida": 2}, "ag_by_closer": {"Mélodi Nirvana": 13, "Lorenzo Meneghetti": 11, "Gabriela Cunha": 11, "João Gabriel Dutra": 9, "Leonardo Soares": 8, "Jonatans Junior": 7, "Izadora Zacker": 7, "Andriely Oliveira": 7, "William Dias": 5, "Henri Meneghetti": 5, "Andresa Caldas": 5, "Émerson Cavitchoni": 5, "Samuel Almeida": 4, "Raissa Antunes": 4, "Jhully Soares": 3}, "ag_by_product": {"SF": 23, "PJ360": 34, "SA": 54, "GS": 16}, "ag_sdr_prod": {"Lorenzo Meneghetti": {"SF": 9, "GS": 6, "PJ360": 4, "SA": 8}, "Jonatans Junior": {"PJ360": 9, "SA": 6}, "Jhully Soares": {"SA": 2, "PJ360": 2, "GS": 1}, "Leonardo Soares": {"SA": 10, "SF": 1, "PJ360": 2}, "João Gabriel Dutra": {"PJ360": 4, "SA": 7, "SF": 2, "GS": 1}, "Mélodi Nirvana": {"GS": 4, "SA": 7, "PJ360": 5, "SF": 1}, "Samuel Almeida": {"GS": 2}, "Izadora Zacker": {"SA": 9, "SF": 4, "PJ360": 3, "GS": 1}, "Andriely Oliveira": {"PJ360": 5, "SF": 2, "SA": 3}, "Henri Meneghetti": {"SA": 2, "SF": 4, "GS": 1}}, "ag_closer_prod": {"Lorenzo Meneghetti": {"SF": 2, "PJ360": 3, "SA": 5, "GS": 1}, "Jonatans Junior": {"PJ360": 4, "SA": 3}, "Jhully Soares": {"SA": 1, "PJ360": 1, "GS": 1}, "Leonardo Soares": {"SA": 6, "SF": 1, "PJ360": 1}, "João Gabriel Dutra": {"PJ360": 3, "SA": 3, "SF": 2, "GS": 1}, "Mélodi Nirvana": {"GS": 2, "SA": 7, "PJ360": 4}, "Samuel Almeida": {"GS": 3, "SA": 1}, "Thuany Ghabril": {"SA": 2}, "Izadora Zacker": {"SA": 4, "SF": 2, "PJ360": 1}, "Andriely Oliveira": {"PJ360": 4, "SA": 2, "SF": 1}, "Suzanny Mauren Dihelem": {"SA": 3}, "Felippe Porcella": {"SF": 1}, "William Dias": {"SA": 5}, "Henri Meneghetti": {"SA": 2, "SF": 2, "PJ360": 1}, "Andresa Caldas": {"SF": 5}, "Laura Feijó Junqueira": {"SA": 1, "GS": 1, "PJ360": 1}, "Gabriela Cunha": {"PJ360": 11}, "Jeferson Ludke": {"SF": 2}, "Émerson Cavitchoni": {"SA": 5}, "Raissa Antunes": {"GS": 3, "SA": 1}, "Djulia Silva": {"GS": 2}, "Leonardo Ribeiro": {"SF": 2}, "Maria Luísa": {"SA": 1, "GS": 1}, "Lorenzo Coronel": {"SA": 2}, "Samuel Brião": {"SF": 1}, "Haynnã": {"GS": 1}, "Adalberto Neto": {"SF": 2}}, "re_by_closer": {"Gabriela Cunha": 15, "Émerson Cavitchoni": 5, "William Dias": 5, "Andresa Caldas": 5, "Leonardo Ribeiro": 5, "Suzanny Mauren Dihelem": 4, "Lorenzo Coronel": 4, "Felippe Porcella": 3, "Raissa Antunes": 3, "Samuel Brião": 3, "Adalberto Neto": 3, "Thuany Ghabril": 2, "Jeferson Ludke": 2, "Djulia Silva": 2, "Maria Luísa": 2}, "re_by_sdr": {"Lorenzo Meneghetti": 19, "Izadora Zacker": 15, "Leonardo Soares": 9, "Jonatans Junior": 8, "Henri Meneghetti": 4, "Mélodi Nirvana": 4, "João Gabriel Dutra": 4, "Andriely Oliveira": 4}, "re_by_product": {"SA": 25, "PJ360": 15, "SF": 13, "GS": 14}, "ns_by_closer": {"Lorenzo Coronel": 7, "Jeferson Ludke": 6, "Gabriela Cunha": 6, "Thuany Ghabril": 4, "Suzanny Mauren Dihelem": 4, "Émerson Cavitchoni": 4, "Samuel Brião": 3, "Adalberto Neto": 2, "Felippe Porcella": 2, "William Dias": 1}, "ns_by_sdr": {"Leonardo Soares": 8, "Jonatans Junior": 5, "João Gabriel Dutra": 5, "Henri Meneghetti": 5, "Lorenzo Meneghetti": 5, "Izadora Zacker": 4, "Mélodi Nirvana": 4, "Andriely Oliveira": 2, "Jhully Soares": 1}, "ag_fut_by_sdr": {"Mélodi Nirvana": 9, "João Gabriel Dutra": 7, "Jonatans Junior": 6, "Leonardo Soares": 5, "Lorenzo Meneghetti": 4, "Andriely Oliveira": 4, "Izadora Zacker": 3, "Jhully Soares": 2, "Henri Meneghetti": 1}, "ag_fut_by_closer": {"Gabriela Cunha": 14, "Thuany Ghabril": 4, "William Dias": 3, "Samuel Almeida": 3, "Djulia Silva": 2, "Samuel Brião": 2, "Jeferson Ludke": 2, "Leonardo Ribeiro": 2, "Lorenzo Coronel": 2, "Haynnã": 2, "Andresa Caldas": 1, "Maria Luísa": 1, "Raissa Antunes": 1, "Felippe Porcella": 1, "Adalberto Neto": 1}, "ag_fut_by_product": {"PJ360": 11, "SA": 25, "GS": 7}, "perdidos_motivo": {"Sem perfil": 670, "Sem Contato": 72, "Não informado": 65, "Perfil Fake": 43, "Sem interesse": 42, "Sem Retorno": 42, "Teste": 4, "Não esta pronto para comprar": 3, "Sem dinheiro": 1, "Concorrência escolhida": 1}, "perdidos_campaign": {"lead_lp_agro_abo_05-03": 193, "[LEAD] [FORMULÁRIO META] [AGRO] [16_03] [03]": 150, "lead_destino_lp_fiscal_27_03": 78, "lead_lp_fiscal_abo_27_03": 52, "FF | ABO [FORMULARIO DIRETO][FRANQUIA] ABO": 46, "[LEAD] [FORMULÁRIO META] [AGRO] [16_03] [04]": 45, "FF | [FORMULARIO DIRETO][DIVERSOS] ABO": 32, "02 - [FORM DIRETO][ABO]": 31, "search_cadastro_franquia_12_03": 28, "[LEAD] [FORM DIRETO][ABO][FULL PUBLIC]": 24}, "perdidos_etiqueta": {"Lead Studio Agro": 513, "Lead Studio Fiscal": 356, "Lead PJ360º": 69, "Sem etiqueta": 6}, "loss_rate_avg": 84.5, "qual_rate": 12.2, "q2a_rate": 70.9, "ag2re_rate": 40.4};
+const D = {"today":"2026-04-10","updated":"10/04/2026 09:10","days_done":7,"days_left":13,"total_days":20,"metas":{"leads":17172,"ag":903,"re":600},"totais":{"leads":1540,"ag":144,"re":76,"ns":45,"perdidos":1072,"ag_fut":38},"ideal_hoje":{"leads":6010,"ag":316,"re":210},"pace_proj":{"leads":4400,"ag":411,"re":217},"ritmo_diario":{"leads":220,"ag":20.6,"re":10.9},"pace_atual":{"leads":220,"ag":20.6,"re":10.9},"ag_fut_ideal":587,"meta_closer":40,"closer_ideal_hoje":14,"closer_proj":{"Gabriela Cunha":49,"Émerson Cavitchoni":17,"William Dias":17,"Andresa Caldas":17,"Leonardo Ribeiro":17,"Suzanny Mauren Dihelem":14,"Lorenzo Coronel":14,"Felippe Porcella":9,"Raissa Antunes":9,"Samuel Brião":9,"Adalberto Neto":9,"Thuany Ghabril":6,"Jeferson Ludke":6,"Djulia Silva":6,"Maria Luísa":6},"closer_needed":{"Gabriela Cunha":23,"Émerson Cavitchoni":34,"William Dias":34,"Andresa Caldas":34,"Leonardo Ribeiro":34,"Suzanny Mauren Dihelem":35,"Lorenzo Coronel":35,"Felippe Porcella":37,"Raissa Antunes":37,"Samuel Brião":37,"Adalberto Neto":37,"Thuany Ghabril":38,"Jeferson Ludke":38,"Djulia Silva":38,"Maria Luísa":38},"labels":["01/04","02/04","03/04","06/04","07/04","08/04","09/04","10/04","11/04","14/04","15/04","16/04","17/04","22/04","23/04","24/04","27/04","28/04","29/04","30/04"],"series":{"leads":[134,277,431,998,1099,1448,1519,1540,null,null,null,null,null,null,null,null,null,null,null,null],"leads_target":[859,1717,2576,3434,4293,5152,6010,null,null,null,null,null,null,null,null,null,null,null,null,null],"ag":[21,49,49,77,102,125,144,144,null,null,null,null,null,null,null,null,null,null,null,null],"ag_target":[45,90,135,181,226,271,316,null,null,null,null,null,null,null,null,null,null,null,null,null],"re":[14,24,24,42,60,75,76,76,null,null,null,null,null,null,null,null,null,null,null,null],"re_target":[30,60,90,120,150,180,210,null,null,null,null,null,null,null,null,null,null,null,null,null],"perdidos":[34,89,90,501,665,925,1068,1072,null,null,null,null,null,null,null,null,null,null,null,null],"leads_daily":[134,143,154,567,101,349,71,21,null,null,null,null,null,null,null,null,null,null,null,null],"perdidos_daily":[34,55,1,411,164,260,143,4,null,null,null,null,null,null,null,null,null,null,null,null],"loss_rate":[25.4,38.5,0.6,72.5,162.4,74.5,201.4,19.0,null,null,null,null,null,null,null,null,null,null,null,null],"perdidos_SA":[12,33,34,232,292,508,573,573,null,null,null,null,null,null,null,null,null,null,null,null],"perdidos_SF":[19,45,45,238,321,348,389,391,null,null,null,null,null,null,null,null,null,null,null,null],"perdidos_PJ360":[3,10,10,30,47,63,96,96,null,null,null,null,null,null,null,null,null,null,null,null]},"ag_by_sdr":{"Lorenzo Meneghetti":30,"Izadora Zacker":21,"Jonatans Junior":20,"João Gabriel Dutra":17,"Mélodi Nirvana":17,"Leonardo Soares":14,"Andriely Oliveira":11,"Henri Meneghetti":7,"Jhully Soares":5},"ag_by_closer":{"Gabriela Cunha":13,"Mélodi Nirvana":12,"Jonatans Junior":11,"Lorenzo Meneghetti":11,"João Gabriel Dutra":10,"Leonardo Soares":8,"Émerson Cavitchoni":7,"Izadora Zacker":7,"Andriely Oliveira":7,"Andresa Caldas":6,"William Dias":6,"Leonardo Ribeiro":4,"Suzanny Mauren Dihelem":4,"Djulia Silva":4,"Samuel Almeida":4,"Henri Meneghetti":4,"Raissa Antunes":4,"Samuel Brião":3,"Adalberto Neto":3,"Jeferson Ludke":3,"Laura Feijó Junqueira":3,"Maria Luísa":2,"Lorenzo Coronel":2,"Felippe Porcella":1,"Raíssa Nobre":1,"Haynnã":1,"Thuany Ghabril":1},"ag_by_product":{"PJ360":40,"SA":68,"SF":19,"GS":17},"ag_sdr_prod":{"Lorenzo Meneghetti":{"PJ360":5,"SA":11,"GS":7,"SF":7},"Jonatans Junior":{"SA":9,"SF":1,"GS":1,"PJ360":9},"Leonardo Soares":{"SA":11,"SF":1,"PJ360":2},"Izadora Zacker":{"PJ360":6,"SA":13,"SF":2},"João Gabriel Dutra":{"SF":3,"SA":8,"PJ360":5,"GS":1},"Andriely Oliveira":{"PJ360":6,"SA":4,"SF":1},"Jhully Soares":{"SA":2,"PJ360":2,"GS":1},"Mélodi Nirvana":{"GS":4,"SA":7,"PJ360":5,"SF":1},"Henri Meneghetti":{"SA":3,"SF":3,"GS":1}},"ag_closer_prod":{"Émerson Cavitchoni":{"PJ360":1,"SA":6},"Jonatans Junior":{"SA":6,"GS":1,"PJ360":4},"Leonardo Soares":{"SA":7,"PJ360":1},"Izadora Zacker":{"PJ360":3,"SA":3,"SF":1},"Leonardo Ribeiro":{"SF":4},"Lorenzo Meneghetti":{"SA":6,"GS":2,"PJ360":2,"SF":1},"João Gabriel Dutra":{"SA":3,"PJ360":4,"SF":2,"GS":1},"Samuel Brião":{"SF":1,"SA":2},"Suzanny Mauren Dihelem":{"SA":3,"PJ360":1},"Andriely Oliveira":{"PJ360":4,"SA":2,"SF":1},"Andresa Caldas":{"SF":2,"SA":4},"William Dias":{"SA":6},"Djulia Silva":{"SA":1,"GS":2,"PJ360":1},"Mélodi Nirvana":{"GS":2,"SA":7,"PJ360":3},"Samuel Almeida":{"GS":3,"SA":1},"Adalberto Neto":{"SF":3},"Gabriela Cunha":{"PJ360":13},"Felippe Porcella":{"SF":1},"Henri Meneghetti":{"SA":2,"SF":1,"PJ360":1},"Jeferson Ludke":{"SF":2,"SA":1},"Laura Feijó Junqueira":{"SA":1,"GS":1,"PJ360":1},"Raissa Antunes":{"GS":2,"SA":2},"Maria Luísa":{"SA":1,"GS":1},"Lorenzo Coronel":{"SA":2},"Raíssa Nobre":{"SA":1},"Haynnã":{"GS":1},"Thuany Ghabril":{"SA":1}},"re_by_closer":{"Gabriela Cunha":17,"Émerson Cavitchoni":6,"William Dias":6,"Andresa Caldas":6,"Leonardo Ribeiro":6,"Suzanny Mauren Dihelem":5,"Lorenzo Coronel":5,"Felippe Porcella":3,"Raissa Antunes":3,"Samuel Brião":3,"Adalberto Neto":3,"Thuany Ghabril":2,"Jeferson Ludke":2,"Djulia Silva":2,"Maria Luísa":2},"re_by_sdr":{"Lorenzo Meneghetti":22,"Izadora Zacker":17,"Leonardo Soares":10,"Jonatans Junior":9,"Henri Meneghetti":5,"Mélodi Nirvana":5,"João Gabriel Dutra":5,"Andriely Oliveira":5},"re_by_product":{"SA":28,"PJ360":17,"SF":15,"GS":16},"ns_by_closer":{"Lorenzo Coronel":7,"Gabriela Cunha":7,"Jeferson Ludke":6,"Thuany Ghabril":5,"Suzanny Mauren Dihelem":4,"Émerson Cavitchoni":4,"Felippe Porcella":3,"Adalberto Neto":3,"Samuel Brião":3,"William Dias":2,"Samuel Almeida":1},"ns_by_sdr":{"Leonardo Soares":9,"Jonatans Junior":7,"Mélodi Nirvana":6,"João Gabriel Dutra":5,"Henri Meneghetti":5,"Lorenzo Meneghetti":5,"Izadora Zacker":4,"Andriely Oliveira":2,"Jhully Soares":1},"ag_fut_by_sdr":{"Jonatans Junior":9,"João Gabriel Dutra":8,"Mélodi Nirvana":6,"Izadora Zacker":4,"Andriely Oliveira":3,"Leonardo Soares":2,"Lorenzo Meneghetti":2,"Jhully Soares":1,"Henri Meneghetti":1},"ag_fut_by_closer":{"Gabriela Cunha":15,"Lorenzo Coronel":3,"Leonardo Ribeiro":3,"Thuany Ghabril":3,"Samuel Almeida":3,"Haynnã":2,"William Dias":2,"Laura Feijó Junqueira":1,"Djulia Silva":1,"Raissa Antunes":1,"Jeferson Ludke":1,"Samuel Brião":1,"Émerson Cavitchoni":1},"ag_fut_by_product":{"GS":7,"SA":13,"SF":4,"PJ360":14},"perdidos_motivo":{"Sem perfil":737,"Sem Contato":87,"Não informado":68,"Sem Retorno":63,"Sem interesse":53,"Perfil Fake":48,"Teste":8,"Não esta pronto para comprar":3,"Concorrência escolhida":2,"Procurando emprego":1},"perdidos_campaign":{"lead_lp_agro_abo_05-03":198,"[LEAD] [FORMULÁRIO META] [AGRO] [16_03] [03]":178,"lead_destino_lp_fiscal_27_03":88,"lead_lp_fiscal_abo_27_03":57,"FF | ABO [FORMULARIO DIRETO][FRANQUIA] ABO":52,"[LEAD] [FORMULÁRIO META] [AGRO] [16_03] [04]":49,"02 - [FORM DIRETO][ABO]":44,"FF | [FORMULARIO DIRETO][DIVERSOS] ABO":37,"FF | [CADASTRO][VIDEOS][FF] ABO":30,"search_cadastro_franquia_12_03":29},"perdidos_etiqueta":{"Lead Studio Agro":573,"Lead Studio Fiscal":391,"Lead PJ360º":96,"Sem etiqueta":12},"loss_rate_avg":74.3,"qual_rate":13.0,"q2a_rate":72.0,"ag2re_rate":52.8,"leads_by_product":{"SA":1626,"SF":814,"PJ360":96,"Outros":76}};
 
 Chart.defaults.color='#8b92a8';
 Chart.defaults.font.family="'Inter','Segoe UI',sans-serif";
@@ -272,12 +285,16 @@ document.getElementById('kgrid').innerHTML=kCards.map(k=>{
   </div>`;
 }).join('');
 
-// LINE CHARTS (no datalabels)
+// LINE CHARTS
 function lineChart(id,datasets,labels){
   new Chart(document.getElementById(id),{
     type:'line',data:{labels,datasets},
     options:{responsive:true,maintainAspectRatio:true,
-      plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:10,font:{size:10}}},tooltip:{mode:'index'}},
+      plugins:{
+        legend:{position:'bottom',labels:{boxWidth:10,padding:10,font:{size:10}}},
+        tooltip:{mode:'index'},
+        datalabels:{display:false}
+      },
       scales:{x:{grid:{color:'rgba(42,46,66,0.6)'},ticks:{maxRotation:45,font:{size:10}}},y:{grid:{color:'rgba(42,46,66,0.6)'},beginAtZero:true}}}
   });
 }
@@ -304,7 +321,7 @@ new Chart(document.getElementById('ch-daily'),{
   ]},
   options:{responsive:true,maintainAspectRatio:false,
     plugins:{legend:{position:'bottom',labels:{boxWidth:10}},tooltip:{mode:'index'},
-      datalabels:{anchor:'end',align:'top',color:'~e2e8f0',font:{size:9,weight:'bold'},formatter:v=>(v&&v>0)?v:null}},
+      datalabels:{anchor:'end',align:'top',color:'#e2e8f0',font:{size:9,weight:'bold'},formatter:v=>(v&&v>0)?v:null}},
     scales:{x:{grid:{color:'rgba(42,46,66,0.6)'},ticks:{font:{size:10}}},y:{grid:{color:'rgba(42,46,66,0.6)'},beginAtZero:true}}}
 });
 
@@ -315,7 +332,7 @@ function hBar(id,obj,color){
   const maxVal=Math.max(...values);
   new Chart(document.getElementById(id),{
     type:'bar',plugins:[ChartDataLabels],
-    data:{labels,datasets:[{label:'Total',data:values,backgroundColor:color('99',borderColor:color,borderWidth:1,borderRadius:3}]},
+    data:{labels,datasets:[{label:'Total',data:values,backgroundColor:color+'99',borderColor:color,borderWidth:1,borderRadius:3}]},
     options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
       layout:{padding:{right:32,top:4,bottom:4}},
       plugins:{legend:{display:false},tooltip:{mode:'index'},
@@ -563,20 +580,78 @@ new Chart(document.getElementById('ch-camp'),{
   type:'bar',plugins:[ChartDataLabels],
   data:{labels:cKeys,datasets:[{label:'Perdidos',data:cVals,backgroundColor:'#ef444470',borderColor:'#ef4444',borderWidth:1}]},
   options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,layout:{padding:{right:36,top:4,bottom:4}},
-    plugins:{legend:{display:false},datalabels:{anchor:'end',align:'end',color:'~e2e8f0',font:{size:10,weight:'bold'},formatter:v=>v>0?v:null,offset:2}},
+    plugins:{legend:{display:false},datalabels:{anchor:'end',align:'end',color:'#e2e8f0',font:{size:10,weight:'bold'},formatter:v=>v>0?v:null,offset:2}},
     scales:{x:{grid:{color:'rgba(42,46,66,0.6)'},beginAtZero:true,max:230},y:{grid:{display:false},ticks:{font:{size:9}}}}}
 });
 
-// PERDIDOS ACUMULADOS + AG + LEADS
-lineChart('ch-perdacu',[
-  {label:'Perdidos acum.',data:D.series.perdidos,borderColor:'#ef4444',backgroundColor:'#ef444420',borderWidth:2.5,pointRadius:3,tension:.3,fill:true,spanGaps:false},
-  {label:'AG acum.',data:D.series.ag,borderColor:'#6366f1',backgroundColor:'transparent',borderWidth:2,pointRadius:2,tension:.3,fill:false,borderDash:[4,3],spanGaps:false},
-  {label:'Leads acum.',data:D.series.leads,borderColor:'~c4b8a6',backgroundColor:'transparent',borderWidth:1.5,pointRadius:2,tension:.3,fill:false,borderDash:[6,4],spanGaps:false}
-],D.labels);
+// PERDIDOS ACUMULADOS + AG + LEADS — com % dos leads
+new Chart(document.getElementById('ch-perdacu'),{
+  type:'line',plugins:[ChartDataLabels],
+  data:{labels:D.labels,datasets:[
+    {label:'Perdidos acum.',data:D.series.perdidos,borderColor:'#ef4444',backgroundColor:'#ef444420',borderWidth:2.5,pointRadius:3,tension:.3,fill:true,spanGaps:false},
+    {label:'AG acum.',data:D.series.ag,borderColor:'#6366f1',backgroundColor:'transparent',borderWidth:2,pointRadius:2,tension:.3,fill:false,borderDash:[4,3],spanGaps:false},
+    {label:'Leads acum.',data:D.series.leads,borderColor:'#14b8a6',backgroundColor:'transparent',borderWidth:1.5,pointRadius:2,tension:.3,fill:false,borderDash:[6,4],spanGaps:false}
+  ]},
+  options:{responsive:true,maintainAspectRatio:true,
+    plugins:{
+      legend:{position:'bottom',labels:{boxWidth:10,padding:10,font:{size:10}}},
+      tooltip:{mode:'index'},
+      datalabels:{
+        display:(ctx)=>{
+          const v=ctx.dataset.data[ctx.dataIndex];
+          const leads=D.series.leads[ctx.dataIndex];
+          return v!=null&&leads&&leads>0&&ctx.datasetIndex<2;
+        },
+        formatter:(v,ctx)=>{
+          const leads=D.series.leads[ctx.dataIndex];
+          if(!leads||!v)return null;
+          return Math.round(v/leads*100)+'%';
+        },
+        color:(ctx)=>ctx.datasetIndex===0?'#ef4444':'#6366f1',
+        font:{size:9,weight:'bold'},
+        anchor:'end',align:'top',offset:2,clip:false
+      }
+    },
+    scales:{x:{grid:{color:'rgba(42,46,66,0.6)'},ticks:{maxRotation:45,font:{size:10}}},y:{grid:{color:'rgba(42,46,66,0.6)'},beginAtZero:true}}}
+});
 
-// ÁREA PERDIDOS POR PRODUTO vs LEADS
+// LEADS vs PERDIDOS POR PRODUTO — grouped bar
+(function(){
+  const prds=['SA','SF','PJ360'];
+  const lByPrd=prds.map(p=>D.leads_by_product[p]||0);
+  const pByPrd=prds.map(p=>D.perdidos_etiqueta[p==='SA'?'Lead Studio Agro':p==='SF'?'Lead Studio Fiscal':'Lead PJ360º']||0);
+  new Chart(document.getElementById('ch-prod-compare'),{
+    type:'bar',plugins:[ChartDataLabels],
+    data:{labels:prds,datasets:[
+      {label:'Leads gerados',data:lByPrd,backgroundColor:'rgba(20,184,166,0.55)',borderColor:'#14b8a6',borderWidth:1.5},
+      {label:'Perdidos',data:pByPrd,backgroundColor:'rgba(239,68,68,0.55)',borderColor:'#ef4444',borderWidth:1.5}
+    ]},
+    options:{responsive:true,maintainAspectRatio:true,layout:{padding:{top:24}},
+      plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:10,font:{size:10}}},
+        tooltip:{mode:'index'},
+        datalabels:{anchor:'end',align:'top',color:'#e2e8f0',font:{size:10,weight:'bold'},
+          formatter:v=>v>0?v:null}},
+      scales:{x:{grid:{display:false},ticks:{font:{size:12,weight:'700'}}},y:{grid:{color:'rgba(42,46,66,0.6)'},beginAtZero:true}}}
+  });
+  // TAXA DE PERDA POR PRODUTO
+  const lossRates=prds.map((p,i)=>lByPrd[i]>0?Math.round(pByPrd[i]/lByPrd[i]*100):0);
+  const barCols=lossRates.map(r=>r>=70?'rgba(239,68,68,0.7)':r>=40?'rgba(245,158,11,0.7)':'rgba(34,197,94,0.7)');
+  new Chart(document.getElementById('ch-prod-lossrate'),{
+    type:'bar',plugins:[ChartDataLabels],
+    data:{labels:prds,datasets:[
+      {label:'Taxa de perda (%)',data:lossRates,backgroundColor:barCols,borderColor:barCols.map(c=>c.replace('0.7','1')),borderWidth:1.5}
+    ]},
+    options:{responsive:true,maintainAspectRatio:true,layout:{padding:{top:24}},
+      plugins:{legend:{display:false},
+        datalabels:{anchor:'end',align:'top',color:'#e2e8f0',font:{size:13,weight:'bold'},
+          formatter:v=>v+'%'}},
+      scales:{x:{grid:{display:false},ticks:{font:{size:12,weight:'700'}}},y:{grid:{color:'rgba(42,46,66,0.6)'},beginAtZero:true,max:110,ticks:{callback:v=>v+'%'}}}}
+  });
+})();
+
+// ÁREA PERDIDOS POR PRODUTO vs LEADS — com % dos leads
 new Chart(document.getElementById('ch-prodarea'),{
-  type:'line',
+  type:'line',plugins:[ChartDataLabels],
   data:{labels:D.labels,datasets:[
     {label:'Leads gerados',data:D.series.leads,borderColor:'#14b8a6',backgroundColor:'rgba(20,184,166,0.08)',borderWidth:2,borderDash:[6,4],pointRadius:2,tension:.3,fill:true,spanGaps:false,order:4},
     {label:'Perdidos SA',data:D.series.perdidos_SA,borderColor:PAL.SA,backgroundColor:PAL.SA+'35',borderWidth:2,pointRadius:2,tension:.3,fill:true,spanGaps:false,order:3},
@@ -585,7 +660,28 @@ new Chart(document.getElementById('ch-prodarea'),{
     {label:'Total Perdidos',data:D.series.perdidos,borderColor:'#ef4444',backgroundColor:'transparent',borderWidth:2.5,pointRadius:3,tension:.3,fill:false,spanGaps:false,order:0,borderDash:[]}
   ]},
   options:{responsive:true,maintainAspectRatio:true,
-    plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:10,font:{size:10}}},tooltip:{mode:'index'}},
+    plugins:{
+      legend:{position:'bottom',labels:{boxWidth:10,padding:10,font:{size:10}}},
+      tooltip:{mode:'index'},
+      datalabels:{
+        display:(ctx)=>{
+          const v=ctx.dataset.data[ctx.dataIndex];
+          const leads=D.series.leads[ctx.dataIndex];
+          return v!=null&&leads&&leads>0&&ctx.datasetIndex>0;
+        },
+        formatter:(v,ctx)=>{
+          const leads=D.series.leads[ctx.dataIndex];
+          if(!leads||!v)return null;
+          return Math.round(v/leads*100)+'%';
+        },
+        color:(ctx)=>{
+          const cols=['transparent',PAL.SA,PAL.SF,PAL.PJ360,'#ef4444'];
+          return cols[ctx.datasetIndex]||'#e2e8f0';
+        },
+        font:{size:9,weight:'bold'},
+        anchor:'end',align:'top',offset:2,clip:false
+      }
+    },
     scales:{x:{grid:{color:'rgba(42,46,66,0.6)'},ticks:{maxRotation:45,font:{size:10}}},y:{grid:{color:'rgba(42,46,66,0.6)'},beginAtZero:true}}}
 });
 </script>
