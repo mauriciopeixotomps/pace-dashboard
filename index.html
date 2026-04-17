@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pace Dashboard — Abril 2026</title>
+<title>Pace Dashboard â Abril 2026</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
 <style>
@@ -73,7 +73,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter','Segoe UI',sans-
 <div class="header">
   <div>
     <h1>Pace Dashboard <span>Abril 2026</span></h1>
-    <div style="color:var(--muted);font-size:11px;margin-top:3px">Studio Solução — Acompanhamento de Metas</div>
+    <div style="color:var(--muted);font-size:11px;margin-top:3px">Studio SoluÃ§Ã£o â Acompanhamento de Metas</div>
   </div>
   <div>
     <div class="badge" id="badge-dias"></div>
@@ -91,111 +91,111 @@ body{background:var(--bg);color:var(--text);font-family:'Inter','Segoe UI',sans-
   <div class="prog-days"><span>01/04</span><span id="today-lbl" style="color:var(--accent);font-weight:700"></span><span>30/04</span></div>
 </div>
 
-<div class="st">Taxas de Conversão — Amostragem Abril</div>
+<div class="st">Taxas de ConversÃ£o â Amostragem Abril</div>
 <div class="chips" id="chips"></div>
 
 <div class="st">Pace de Resultados</div>
 <div class="kgrid" id="kgrid"></div>
 
-<div class="st">Evolução Acumulada vs Meta</div>
+<div class="st">EvoluÃ§Ã£o Acumulada vs Meta</div>
 <div class="g4">
   <div class="cc"><div class="ct">Leads</div><div class="cs">Acumulado real vs meta linear</div><canvas id="ch-leads" height="220"></canvas></div>
-  <div class="cc"><div class="ct">Leads MQL</div><div class="cs">Leads gerados − perdidos vs meta</div><canvas id="ch-mql" height="220"></canvas></div>
+  <div class="cc"><div class="ct">Leads MQL</div><div class="cs">Leads gerados â perdidos vs meta</div><canvas id="ch-mql" height="220"></canvas></div>
   <div class="cc"><div class="ct">Agendamentos CC1</div><div class="cs">Acumulado real vs meta linear</div><canvas id="ch-ag" height="220"></canvas></div>
   <div class="cc"><div class="ct">Realizadas CC1</div><div class="cs">Acumulado real vs meta linear</div><canvas id="ch-re" height="220"></canvas></div>
 </div>
 
-<div class="st">Perdidos vs Leads — Volume Diário</div>
+<div class="st">Perdidos vs Leads â Volume DiÃ¡rio</div>
 <div class="g1">
   <div class="cc">
     <div class="ct">Leads Gerados vs Perdidos por Dia</div>
-    <div class="cs">Comparativo diário de geração e descarte &nbsp;·&nbsp; Taxa média de perda: <strong id="loss-avg" style="color:var(--red)"></strong></div>
+    <div class="cs">Comparativo diÃ¡rio de geraÃ§Ã£o e descarte &nbsp;Â·&nbsp; Taxa mÃ©dia de perda: <strong id="loss-avg" style="color:var(--red)"></strong></div>
     <div class="ch-wrap" style="height:200px"><canvas id="ch-daily"></canvas></div>
   </div>
 </div>
 
-<div class="st">SDRs — Agendamentos, Reuniões Futuras, Realizadas e No Shows</div>
+<div class="st">SDRs â Agendamentos, ReuniÃµes Futuras, Realizadas e No Shows</div>
 <div class="g4">
   <div class="cc">
     <div class="sub-head"><span class="sb">SDR</span><span style="font-size:12px;font-weight:700">AG Realizados</span></div>
-    <div class="cs">Agendamentos CC1 feitos no mês</div>
+    <div class="cs">Agendamentos CC1 feitos no mÃªs</div>
     <div class="ch-wrap" style="height:280px"><canvas id="ch-sdr-ag"></canvas></div>
   </div>
   <div class="cc">
     <div class="sub-head"><span class="sb">SDR</span><span style="font-size:12px;font-weight:700">AG para Acontecer</span></div>
-    <div class="cs">Reuniões futuras agendadas — restantes do mês</div>
+    <div class="cs">ReuniÃµes futuras agendadas â restantes do mÃªs</div>
     <div class="ch-wrap" style="height:280px"><canvas id="ch-sdr-agfut"></canvas></div>
   </div>
   <div class="cc">
     <div class="sub-head"><span class="sb">SDR</span><span style="font-size:12px;font-weight:700">RE Realizadas</span></div>
-    <div class="cs">Reuniões realizadas (por quem agendou)</div>
+    <div class="cs">ReuniÃµes realizadas (por quem agendou)</div>
     <div class="ch-wrap" style="height:280px"><canvas id="ch-sdr-re"></canvas></div>
   </div>
   <div class="cc">
     <div class="sub-head"><span class="sb">SDR</span><span style="font-size:12px;font-weight:700">No Shows</span></div>
-    <div class="cs">Reuniões não realizadas (por quem agendou)</div>
+    <div class="cs">ReuniÃµes nÃ£o realizadas (por quem agendou)</div>
     <div class="ch-wrap" style="height:280px"><canvas id="ch-sdr-ns"></canvas></div>
   </div>
 </div>
 
-<div class="st" style="--accent:#f59e0b">Pace de SDRs — Meta 70 RE por SDR</div>
+<div class="st" style="--accent:#f59e0b">Pace de SDRs â Meta 70 RE por SDR</div>
 <div class="cc g1">
-  <div class="ct" id="sdr-pace-title">Realizadas + Futuras vs Meta (70) — Ideal hoje: <span id="closer-ideal-span"></span></div>
-  <div class="cs">Verde = RE realizadas (reuniões que o SDR agendou e aconteceram) · Roxo = futuras agendadas · Cinza = gap até meta 70 · Linha laranja = ideal hoje</div>
+  <div class="ct" id="sdr-pace-title">Realizadas + Futuras vs Meta (70) â Ideal hoje: <span id="closer-ideal-span"></span></div>
+  <div class="cs">Verde = RE realizadas (reuniÃµes que o SDR agendou e aconteceram) Â· Roxo = futuras agendadas Â· Cinza = gap atÃ© meta 70 Â· Linha laranja = ideal hoje</div>
   <div class="ch-wrap" style="height:340px"><canvas id="ch-closer-meta"></canvas></div>
 </div>
 
-<div class="st" style="--accent:var(--green)">Pace de Closers — Meta 40 RE por Closer</div>
+<div class="st" style="--accent:var(--green)">Pace de Closers â Meta 40 RE por Closer</div>
 <div class="cc g1">
-  <div class="ct">Realizadas + Futuras vs Meta (40) — Ideal hoje: <span id="closer40-ideal-span"></span></div>
-  <div class="cs">Verde = RE realizadas · Roxo = futuras agendadas · Cinza = gap até meta 40 · Linha laranja = ideal hoje</div>
+  <div class="ct">Realizadas + Futuras vs Meta (40) â Ideal hoje: <span id="closer40-ideal-span"></span></div>
+  <div class="cs">Verde = RE realizadas Â· Roxo = futuras agendadas Â· Cinza = gap atÃ© meta 40 Â· Linha laranja = ideal hoje</div>
   <div class="ch-wrap" style="height:480px"><canvas id="ch-closer-meta40"></canvas></div>
 </div>
 
-<div class="st" style="--accent:var(--green)">Closers — Agendamentos, Reuniões Futuras, Realizadas e No Shows</div>
+<div class="st" style="--accent:var(--green)">Closers â Agendamentos, ReuniÃµes Futuras, Realizadas e No Shows</div>
 <div class="g4">
   <div class="cc">
     <div class="sub-head"><span class="sb cl">Closer</span><span style="font-size:12px;font-weight:700">AG por Closer</span></div>
-    <div class="cs">Negócios com AG agendado (dono do deal)</div>
+    <div class="cs">NegÃ³cios com AG agendado (dono do deal)</div>
     <div class="ch-wrap" style="height:340px"><canvas id="ch-cl-ag"></canvas></div>
   </div>
   <div class="cc">
     <div class="sub-head"><span class="sb cl">Closer</span><span style="font-size:12px;font-weight:700">AG para Acontecer</span></div>
-    <div class="cs">Reuniões futuras a conduzir</div>
+    <div class="cs">ReuniÃµes futuras a conduzir</div>
     <div class="ch-wrap" style="height:340px"><canvas id="ch-cl-agfut"></canvas></div>
   </div>
   <div class="cc">
     <div class="sub-head"><span class="sb cl">Closer</span><span style="font-size:12px;font-weight:700">RE Realizadas</span></div>
-    <div class="cs">Reuniões conduzidas por closer</div>
+    <div class="cs">ReuniÃµes conduzidas por closer</div>
     <div class="ch-wrap" style="height:340px"><canvas id="ch-cl-re"></canvas></div>
   </div>
   <div class="cc">
     <div class="sub-head"><span class="sb cl">Closer</span><span style="font-size:12px;font-weight:700">No Shows</span></div>
-    <div class="cs">Reuniões não realizadas (por closer responsável)</div>
+    <div class="cs">ReuniÃµes nÃ£o realizadas (por closer responsÃ¡vel)</div>
     <div class="ch-wrap" style="height:340px"><canvas id="ch-cl-ns"></canvas></div>
   </div>
 </div>
 
-<div class="st">Distribuição por Produto</div>
+<div class="st">DistribuiÃ§Ã£o por Produto</div>
 <div class="g2">
-  <div class="cc"><div class="ct">AG Realizados por Produto</div><div class="cs">SA · SF · PJ360 · GS</div><canvas id="ch-prod-ag" height="200"></canvas></div>
-  <div class="cc"><div class="ct">RE Realizadas por Produto</div><div class="cs">SA · SF · PJ360 · GS</div><canvas id="ch-prod-re" height="200"></canvas></div>
+  <div class="cc"><div class="ct">AG Realizados por Produto</div><div class="cs">SA Â· SF Â· PJ360 Â· GS</div><canvas id="ch-prod-ag" height="200"></canvas></div>
+  <div class="cc"><div class="ct">RE Realizadas por Produto</div><div class="cs">SA Â· SF Â· PJ360 Â· GS</div><canvas id="ch-prod-re" height="200"></canvas></div>
 </div>
 
-<div class="st">Mix de Produtos por SDR — Agendamentos</div>
+<div class="st">Mix de Produtos por SDR â Agendamentos</div>
 <div class="cc g1">
-  <div class="ct" style="margin-bottom:12px">Detalhe AG por SDR × Produto</div>
+  <div class="ct" style="margin-bottom:12px">Detalhe AG por SDR Ã Produto</div>
   <div id="sdr-table"></div>
 </div>
 
-<div class="st">Análise de Perdidos — Sinais de Marketing</div>
+<div class="st">AnÃ¡lise de Perdidos â Sinais de Marketing</div>
 <div class="g2">
   <div class="cc">
-    <div class="ct">Perdidos por Motivo</div><div class="cs">Classificação de causa de descarte</div>
+    <div class="ct">Perdidos por Motivo</div><div class="cs">ClassificaÃ§Ã£o de causa de descarte</div>
     <div class="ch-wrap" style="height:280px"><canvas id="ch-motivo"></canvas></div>
   </div>
   <div class="cc">
-    <div class="ct">Perdidos por Campanha (Top 10)</div><div class="cs">UTM campaign — qualidade de tráfego por origem</div>
+    <div class="ct">Perdidos por Campanha (Top 10)</div><div class="cs">UTM campaign â qualidade de trÃ¡fego por origem</div>
     <div class="ch-wrap" style="height:280px"><canvas id="ch-camp"></canvas></div>
   </div>
 </div>
@@ -203,12 +203,12 @@ body{background:var(--bg);color:var(--text);font-family:'Inter','Segoe UI',sans-
 <div class="g2">
   <div class="cc">
     <div class="ct">Perdidos e Agendamentos Acumulados vs Leads</div>
-    <div class="cs">Descarte e agendamentos frente à geração de leads</div>
+    <div class="cs">Descarte e agendamentos frente Ã  geraÃ§Ã£o de leads</div>
     <canvas id="ch-perdacu" height="240"></canvas>
   </div>
   <div class="cc">
     <div class="ct">Perdidos por Produto vs Leads Gerados</div>
-    <div class="cs">Pace acumulado de descarte por linha de negócio</div>
+    <div class="cs">Pace acumulado de descarte por linha de negÃ³cio</div>
     <canvas id="ch-prodarea" height="240"></canvas>
   </div>
 </div>
@@ -216,12 +216,12 @@ body{background:var(--bg);color:var(--text);font-family:'Inter','Segoe UI',sans-
 <div class="g2">
   <div class="cc">
     <div class="ct">Leads Gerados vs Perdidos por Produto</div>
-    <div class="cs">Total de leads recebidos e descartados por linha de negócio em Abril</div>
+    <div class="cs">Total de leads recebidos e descartados por linha de negÃ³cio em Abril</div>
     <canvas id="ch-prod-compare" height="240"></canvas>
   </div>
   <div class="cc">
     <div class="ct">Taxa de Perda por Produto</div>
-    <div class="cs">% de leads descartados em relação ao total gerado por produto</div>
+    <div class="cs">% de leads descartados em relaÃ§Ã£o ao total gerado por produto</div>
     <canvas id="ch-prod-lossrate" height="240"></canvas>
   </div>
 </div>
@@ -229,7 +229,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter','Segoe UI',sans-
 </div>
 
 <script>
-const D = {"today": "2026-04-16", "updated": "16/04/2026 14:59", "days_done": 12, "days_left": 8, "total_days": 20, "metas": {"leads": 2500, "ag": 903, "re": 600, "mql": 600}, "totais": {"leads": 2306, "ag": 179, "re": 148, "ns": 72, "perdidos": 1782, "ag_fut": 40, "mql": 524, "reag": 0}, "ideal_hoje": {"leads": 1500, "ag": 542, "re": 360, "mql": 360}, "pace_proj": {"leads": 3843, "ag": 298, "re": 247}, "ritmo_diario": {"leads": 24, "ag": 90, "re": 56}, "pace_atual": {"leads": 192, "ag": 14.9, "re": 12.3}, "ag_fut_ideal": 92, "meta_closer": 40, "meta_sdr": 70, "closer_ideal_hoje": 24, "closer_proj": {"Gabriela Cunha": 38, "Leonardo Ribeiro": 16, "Lorenzo Coronel": 14, "Adalberto Neto": 12, "William Dias": 11, "Suzanny Mauren Dihelem": 11, "Andresa Caldas": 11, "Samuel Brião": 10, "Samuel Almeida": 10, "Thuany Ghabril": 9, "Émerson Cavitchoni": 9, "Djulia Silva": 9, "Felippe Porcella": 7, "Raissa Antunes": 5, "Jeferson Ludke": 4, "Haynnã": 3, "Maria Luísa": 3, "Laura Feijó Junqueira": 2, "Bruna Salazar": 2, "Bruna Mota": 1, "Jhully Soares": 1}, "closer_needed": {"Laura Feijó Junqueira": 5, "Bruna Salazar": 5, "Bruna Mota": 5, "Haynnã": 5, "Jhully Soares": 5, "Maria Luísa": 5, "Samuel Brião": 4, "Samuel Almeida": 4, "Leonardo Ribeiro": 4, "Raissa Antunes": 4, "Adalberto Neto": 4, "Felippe Porcella": 4, "Thuany Ghabril": 4, "Émerson Cavitchoni": 4, "Jeferson Ludke": 4, "Djulia Silva": 4, "William Dias": 4, "Suzanny Mauren Dihelem": 4, "Lorenzo Coronel": 4, "Andresa Caldas": 4, "Gabriela Cunha": 2}, "labels": ["01/04", "02/04", "03/04", "06/04", "07/04", "08/04", "09/04", "10/04", "13/04", "14/04", "15/04", "16/04", "17/04", "22/04", "23/04", "24/04", "27/04", "28/04", "29/04", "30/04"], "series": {"leads": [133, 277, 428, 605, 707, 1051, 1115, 1194, 1333, 1491, 1668, 1714, null, null, null, null, null, null, null, null], "leads_target": [125, 250, 375, 500, 625, 750, 875, 1000, 1125, 1250, 1375, 1500, 1625, 1750, 1875, 2000, 2125, 2250, 2375, 2500], "ag": [18, 30, 30, 47, 60, 73, 90, 100, 121, 148, 177, 179, null, null, null, null, null, null, null, null], "ag_target": [45, 90, 135, 181, 226, 271, 316, 361, 406, 452, 497, 542, 587, 632, 677, 722, 768, 813, 858, 903], "re": [12, 21, 21, 37, 53, 66, 84, 96, 109, 126, 147, 147, null, null, null, null, null, null, null, null], "re_target": [30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360, 390, 420, 450, 480, 510, 540, 570, 600], "perdidos": [29, 77, 78, 434, 578, 829, 961, 1037, 1336, 1514, 1721, 1766, null, null, null, null, null, null, null, null], "leads_daily": [133, 144, 151, 177, 102, 344, 64, 79, 139, 158, 177, 46, null, null, null, null, null, null, null, null], "perdidos_daily": [29, 48, 1, 356, 144, 251, 132, 76, 299, 178, 207, 45, null, null, null, null, null, null, null, null], "loss_rate": [21.8, 33.3, 0.7, 201.1, 141.2, 73.0, 206.2, 96.2, 215.1, 112.7, 116.9, 97.8, null, null, null, null, null, null, null, null], "perdidos_SA": [12, 33, 34, 226, 285, 500, 565, 603, 724, 827, 938, 971, null, null, null, null, null, null, null, null], "perdidos_SF": [14, 33, 33, 178, 242, 261, 291, 302, 434, 474, 524, 532, null, null, null, null, null, null, null, null], "perdidos_PJ360": [3, 10, 10, 29, 46, 62, 95, 110, 152, 184, 221, 224, null, null, null, null, null, null, null, null], "mql": [104, 200, 350, 171, 129, 222, 154, 157, 0, 0, 0, 0, null, null, null, null, null, null, null, null], "mql_target": [30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360, 390, 420, 450, 480, 510, 540, 570, 600]}, "ag_by_sdr": {"Izadora Zacker": 37, "Lorenzo Meneghetti": 30, "Jonatans Junior": 22, "Leonardo Soares": 21, "Mélodi Nirvana": 18, "Andriely Oliveira": 17, "João Gabriel Dutra": 16, "Henri Meneghetti": 14, "Jhully Soares": 3, "Glauber Bagetti": 1}, "ag_by_closer": {"Gabriela Cunha": 35, "Lorenzo Coronel": 14, "Leonardo Ribeiro": 14, "Adalberto Neto": 12, "Suzanny Mauren Dihelem": 11, "Andresa Caldas": 11, "William Dias": 11, "Samuel Brião": 10, "Samuel Almeida": 10, "Thuany Ghabril": 9, "Djulia Silva": 9, "Émerson Cavitchoni": 9, "Felippe Porcella": 5, "Raissa Antunes": 4, "Jeferson Ludke": 4}, "ag_by_product": {"GS": 30, "SF": 47, "SA": 65, "PJ360": 37}, "ag_sdr_prod": {"Glauber Bagetti": {"GS": 1}, "Leonardo Soares": {"SF": 6, "SA": 9, "GS": 2, "PJ360": 4}, "Jonatans Junior": {"SF": 5, "PJ360": 10, "GS": 3, "SA": 4}, "Lorenzo Meneghetti": {"SF": 7, "GS": 8, "SA": 13, "PJ360": 2}, "Henri Meneghetti": {"SF": 7, "SA": 2, "GS": 3, "PJ360": 2}, "Mélodi Nirvana": {"SA": 6, "GS": 6, "SF": 2, "PJ360": 4}, "João Gabriel Dutra": {"SA": 7, "SF": 5, "PJ360": 3, "GS": 1}, "Izadora Zacker": {"SF": 12, "SA": 15, "GS": 4, "PJ360": 6}, "Andriely Oliveira": {"GS": 2, "SF": 3, "SA": 7, "PJ360": 5}, "Jhully Soares": {"SA": 2, "PJ360": 1}}, "ag_closer_prod": {"Raissa Antunes": {"GS": 4}, "Felippe Porcella": {"SF": 5}, "Jeferson Ludke": {"SF": 4}, "Adalberto Neto": {"SF": 9, "SA": 3}, "Suzanny Mauren Dihelem": {"SA": 11}, "Andresa Caldas": {"SF": 10, "SA": 1}, "Lorenzo Coronel": {"SA": 14}, "Samuel Brião": {"SF": 8, "GS": 1, "PJ360": 1}, "Samuel Almeida": {"GS": 10}, "William Dias": {"SA": 11}, "Leonardo Ribeiro": {"SF": 10, "SA": 4}, "Thuany Ghabril": {"SA": 9}, "Djulia Silva": {"GS": 8, "SA": 1}, "Haynnã": {"GS": 2}, "Gabriela Cunha": {"PJ360": 35}, "Maria Luísa": {"GS": 3}, "Émerson Cavitchoni": {"SA": 9}, "Bruna Mota": {"SA": 1}, "Laura Feijó Junqueira": {"GS": 2}, "Bruna Salazar": {"SA": 1, "SF": 1}, "Jhully Soares": {"PJ360": 1}}, "re_by_closer": {"Gabriela Cunha": 26, "Lorenzo Coronel": 12, "Leonardo Ribeiro": 12, "Adalberto Neto": 11, "William Dias": 11, "Suzanny Mauren Dihelem": 10, "Andresa Caldas": 9, "Samuel Brião": 7, "Samuel Almeida": 7, "Thuany Ghabril": 7, "Émerson Cavitchoni": 7, "Felippe Porcella": 6, "Djulia Silva": 6, "Raissa Antunes": 5, "Jeferson Ludke": 4}, "re_by_sdr": {"Izadora Zacker": 34, "Lorenzo Meneghetti": 31, "Leonardo Soares": 17, "Jonatans Junior": 17, "Andriely Oliveira": 14, "João Gabriel Dutra": 13, "Henri Meneghetti": 11, "Mélodi Nirvana": 8, "Jhully Soares": 2, "Glauber Bagetti": 1}, "re_by_product": {"GS": 26, "SF": 43, "SA": 53, "PJ360": 26}, "ns_by_closer": {"Gabriela Cunha": 14, "Lorenzo Coronel": 10, "Thuany Ghabril": 9, "Jeferson Ludke": 7, "Adalberto Neto": 6, "Émerson Cavitchoni": 5, "William Dias": 4, "Felippe Porcella": 4, "Samuel Brião": 4, "Suzanny Mauren Dihelem": 4, "Samuel Almeida": 2, "Andresa Caldas": 1, "Djulia Silva": 1, "Leonardo Ribeiro": 1}, "ns_by_sdr": {"Mélodi Nirvana": 14, "Leonardo Soares": 11, "Jonatans Junior": 11, "João Gabriel Dutra": 10, "Izadora Zacker": 9, "Lorenzo Meneghetti": 8, "Henri Meneghetti": 5, "Andriely Oliveira": 3, "Jhully Soares": 1}, "ag_fut_by_sdr": {"Mélodi Nirvana": 10, "Jonatans Junior": 7, "Izadora Zacker": 6, "Leonardo Soares": 6, "Henri Meneghetti": 3, "Andriely Oliveira": 3, "João Gabriel Dutra": 3, "Lorenzo Meneghetti": 1, "Jhully Soares": 1}, "ag_fut_by_closer": {"Gabriela Cunha": 12, "Leonardo Ribeiro": 4, "Samuel Brião": 3, "Djulia Silva": 3, "Samuel Almeida": 3, "Lorenzo Coronel": 2, "Émerson Cavitchoni": 2, "Andresa Caldas": 2, "Bruna Salazar": 2, "Thuany Ghabril": 2, "Suzanny Mauren Dihelem": 1, "Laura Feijó Junqueira": 1, "Adalberto Neto": 1, "Felippe Porcella": 1, "Jhully Soares": 1}, "ag_fut_by_product": {"PJ360": 14, "SA": 12, "SF": 8, "GS": 6}, "perdidos_motivo": {"Sem perfil": 950, "Sem Retorno": 220, "Sem Contato": 208, "Não informado": 147, "Sem interesse": 99, "Duplicidade": 71, "Perfil Fake": 59, "Teste": 11, "Procurando emprego": 4, "Mudança de Prioridades": 3}, "perdidos_campaign": {"lead_lp_agro_abo_05-03": 376, "[LEAD] [FORMULÁRIO META] [AGRO] [16_03] [03]": 197, "FF | ABO [FORMULARIO DIRETO][FRANQUIA] ABO": 98, "02 - [FORM DIRETO][ABO]": 95, "lead_destino_lp_fiscal_27_03": 95, "[LEAD] [FORMULÁRIO META] [AGRO] [16_03] [04]": 83, "[FORM DIRETO][ABO]": 81, "FF | [CADASTRO][VIDEOS][FF] ABO": 60, "lead_lp_fiscal_abo_27_03": 57, "FF | [CADASTRO] [STUDIO AGRO]  [FUNDO FUNIL][2] ABO": 53}, "perdidos_etiqueta": {"Lead Studio Agro": 978, "Lead Studio Fiscal": 538, "Lead PJ360º": 227, "Sem etiqueta": 38, "Lead Partner": 1}, "leads_by_product": {"SF": 538, "SA": 978, "PJ360": 227, "Outro": 39}, "loss_rate_avg": 109.7, "qual_rate": 15.1, "q2a_rate": 51.3, "ag2re_rate": 59.0};
+const D = {"today": "2026-04-16", "updated": "16/04/2026 14:59", "days_done": 12, "days_left": 8, "total_days": 20, "metas": {"leads": 2500, "ag": 903, "re": 600, "mql": 600}, "totais": {"leads": 2306, "ag": 179, "re": 148, "ns": 72, "perdidos": 1782, "ag_fut": 40, "mql": 524, "reag": 0}, "ideal_hoje": {"leads": 1500, "ag": 542, "re": 360, "mql": 360}, "pace_proj": {"leads": 3843, "ag": 298, "re": 247}, "ritmo_diario": {"leads": 24, "ag": 90, "re": 56}, "pace_atual": {"leads": 192, "ag": 14.9, "re": 12.3}, "ag_fut_ideal": 92, "meta_closer": 40, "meta_sdr": 70, "closer_ideal_hoje": 24, "closer_proj": {"Gabriela Cunha": 38, "Leonardo Ribeiro": 16, "Lorenzo Coronel": 14, "Adalberto Neto": 12, "William Dias": 11, "Suzanny Mauren Dihelem": 11, "Andresa Caldas": 11, "Samuel BriÃ£o": 10, "Samuel Almeida": 10, "Thuany Ghabril": 9, "Ãmerson Cavitchoni": 9, "Djulia Silva": 9, "Felippe Porcella": 7, "Raissa Antunes": 5, "Jeferson Ludke": 4, "HaynnÃ£": 3, "Maria LuÃ­sa": 3, "Laura FeijÃ³ Junqueira": 2, "Bruna Salazar": 2, "Bruna Mota": 1, "Jhully Soares": 1}, "closer_needed": {"Laura FeijÃ³ Junqueira": 5, "Bruna Salazar": 5, "Bruna Mota": 5, "HaynnÃ£": 5, "Jhully Soares": 5, "Maria LuÃ­sa": 5, "Samuel BriÃ£o": 4, "Samuel Almeida": 4, "Leonardo Ribeiro": 4, "Raissa Antunes": 4, "Adalberto Neto": 4, "Felippe Porcella": 4, "Thuany Ghabril": 4, "Ãmerson Cavitchoni": 4, "Jeferson Ludke": 4, "Djulia Silva": 4, "William Dias": 4, "Suzanny Mauren Dihelem": 4, "Lorenzo Coronel": 4, "Andresa Caldas": 4, "Gabriela Cunha": 2}, "labels": ["01/04", "02/04", "03/04", "06/04", "07/04", "08/04", "09/04", "10/04", "13/04", "14/04", "15/04", "16/04", "17/04", "22/04", "23/04", "24/04", "27/04", "28/04", "29/04", "30/04"], "series": {"leads": [133, 277, 428, 605, 707, 1051, 1115, 1194, 1333, 1491, 1668, 1714, null, null, null, null, null, null, null, null], "leads_target": [125, 250, 375, 500, 625, 750, 875, 1000, 1125, 1250, 1375, 1500, 1625, 1750, 1875, 2000, 2125, 2250, 2375, 2500], "ag": [18, 30, 30, 47, 60, 73, 90, 100, 121, 148, 177, 179, null, null, null, null, null, null, null, null], "ag_target": [45, 90, 135, 181, 226, 271, 316, 361, 406, 452, 497, 542, 587, 632, 677, 722, 768, 813, 858, 903], "re": [12, 21, 21, 37, 53, 66, 84, 96, 109, 126, 147, 147, null, null, null, null, null, null, null, null], "re_target": [30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360, 390, 420, 450, 480, 510, 540, 570, 600], "perdidos": [29, 77, 78, 434, 578, 829, 961, 1037, 1336, 1514, 1721, 1766, null, null, null, null, null, null, null, null], "leads_daily": [133, 144, 151, 177, 102, 344, 64, 79, 139, 158, 177, 46, null, null, null, null, null, null, null, null], "perdidos_daily": [29, 48, 1, 356, 144, 251, 132, 76, 299, 178, 207, 45, null, null, null, null, null, null, null, null], "loss_rate": [21.8, 33.3, 0.7, 201.1, 141.2, 73.0, 206.2, 96.2, 215.1, 112.7, 116.9, 97.8, null, null, null, null, null, null, null, null], "perdidos_SA": [12, 33, 34, 226, 285, 500, 565, 603, 724, 827, 938, 971, null, null, null, null, null, null, null, null], "perdidos_SF": [14, 33, 33, 178, 242, 261, 291, 302, 434, 474, 524, 532, null, null, null, null, null, null, null, null], "perdidos_PJ360": [3, 10, 10, 29, 46, 62, 95, 110, 152, 184, 221, 224, null, null, null, null, null, null, null, null], "mql": [104, 200, 350, 171, 129, 222, 154, 157, 0, 0, 0, 0, null, null, null, null, null, null, null, null], "mql_target": [30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360, 390, 420, 450, 480, 510, 540, 570, 600]}, "ag_by_sdr": {"Izadora Zacker": 37, "Lorenzo Meneghetti": 30, "Jonatans Junior": 22, "Leonardo Soares": 21, "MÃ©lodi Nirvana": 18, "Andriely Oliveira": 17, "JoÃ£o Gabriel Dutra": 16, "Henri Meneghetti": 14, "Jhully Soares": 3, "Glauber Bagetti": 1}, "ag_by_closer": {"Gabriela Cunha": 35, "Lorenzo Coronel": 14, "Leonardo Ribeiro": 14, "Adalberto Neto": 12, "Suzanny Mauren Dihelem": 11, "Andresa Caldas": 11, "William Dias": 11, "Samuel BriÃ£o": 10, "Samuel Almeida": 10, "Thuany Ghabril": 9, "Djulia Silva": 9, "Ãmerson Cavitchoni": 9, "Felippe Porcella": 5, "Raissa Antunes": 4, "Jeferson Ludke": 4}, "ag_by_product": {"GS": 30, "SF": 47, "SA": 65, "PJ360": 37}, "ag_sdr_prod": {"Glauber Bagetti": {"GS": 1}, "Leonardo Soares": {"SF": 6, "SA": 9, "GS": 2, "PJ360": 4}, "Jonatans Junior": {"SF": 5, "PJ360": 10, "GS": 3, "SA": 4}, "Lorenzo Meneghetti": {"SF": 7, "GS": 8, "SA": 13, "PJ360": 2}, "Henri Meneghetti": {"SF": 7, "SA": 2, "GS": 3, "PJ360": 2}, "MÃ©lodi Nirvana": {"SA": 6, "GS": 6, "SF": 2, "PJ360": 4}, "JoÃ£o Gabriel Dutra": {"SA": 7, "SF": 5, "PJ360": 3, "GS": 1}, "Izadora Zacker": {"SF": 12, "SA": 15, "GS": 4, "PJ360": 6}, "Andriely Oliveira": {"GS": 2, "SF": 3, "SA": 7, "PJ360": 5}, "Jhully Soares": {"SA": 2, "PJ360": 1}}, "ag_closer_prod": {"Raissa Antunes": {"GS": 4}, "Felippe Porcella": {"SF": 5}, "Jeferson Ludke": {"SF": 4}, "Adalberto Neto": {"SF": 9, "SA": 3}, "Suzanny Mauren Dihelem": {"SA": 11}, "Andresa Caldas": {"SF": 10, "SA": 1}, "Lorenzo Coronel": {"SA": 14}, "Samuel BriÃ£o": {"SF": 8, "GS": 1, "PJ360": 1}, "Samuel Almeida": {"GS": 10}, "William Dias": {"SA": 11}, "Leonardo Ribeiro": {"SF": 10, "SA": 4}, "Thuany Ghabril": {"SA": 9}, "Djulia Silva": {"GS": 8, "SA": 1}, "HaynnÃ£": {"GS": 2}, "Gabriela Cunha": {"PJ360": 35}, "Maria LuÃ­sa": {"GS": 3}, "Ãmerson Cavitchoni": {"SA": 9}, "Bruna Mota": {"SA": 1}, "Laura FeijÃ³ Junqueira": {"GS": 2}, "Bruna Salazar": {"SA": 1, "SF": 1}, "Jhully Soares": {"PJ360": 1}}, "re_by_closer": {"Gabriela Cunha": 26, "Lorenzo Coronel": 12, "Leonardo Ribeiro": 12, "Adalberto Neto": 11, "William Dias": 11, "Suzanny Mauren Dihelem": 10, "Andresa Caldas": 9, "Samuel BriÃ£o": 7, "Samuel Almeida": 7, "Thuany Ghabril": 7, "Ãmerson Cavitchoni": 7, "Felippe Porcella": 6, "Djulia Silva": 6, "Raissa Antunes": 5, "Jeferson Ludke": 4}, "re_by_sdr": {"Izadora Zacker": 34, "Lorenzo Meneghetti": 31, "Leonardo Soares": 17, "Jonatans Junior": 17, "Andriely Oliveira": 14, "JoÃ£o Gabriel Dutra": 13, "Henri Meneghetti": 11, "MÃ©lodi Nirvana": 8, "Jhully Soares": 2, "Glauber Bagetti": 1}, "re_by_product": {"GS": 26, "SF": 43, "SA": 53, "PJ360": 26}, "ns_by_closer": {"Gabriela Cunha": 14, "Lorenzo Coronel": 10, "Thuany Ghabril": 9, "Jeferson Ludke": 7, "Adalberto Neto": 6, "Ãmerson Cavitchoni": 5, "William Dias": 4, "Felippe Porcella": 4, "Samuel BriÃ£o": 4, "Suzanny Mauren Dihelem": 4, "Samuel Almeida": 2, "Andresa Caldas": 1, "Djulia Silva": 1, "Leonardo Ribeiro": 1}, "ns_by_sdr": {"MÃ©lodi Nirvana": 14, "Leonardo Soares": 11, "Jonatans Junior": 11, "JoÃ£o Gabriel Dutra": 10, "Izadora Zacker": 9, "Lorenzo Meneghetti": 8, "Henri Meneghetti": 5, "Andriely Oliveira": 3, "Jhully Soares": 1}, "ag_fut_by_sdr": {"MÃ©lodi Nirvana": 10, "Jonatans Junior": 7, "Izadora Zacker": 6, "Leonardo Soares": 6, "Henri Meneghetti": 3, "Andriely Oliveira": 3, "JoÃ£o Gabriel Dutra": 3, "Lorenzo Meneghetti": 1, "Jhully Soares": 1}, "ag_fut_by_closer": {"Gabriela Cunha": 12, "Leonardo Ribeiro": 4, "Samuel BriÃ£o": 3, "Djulia Silva": 3, "Samuel Almeida": 3, "Lorenzo Coronel": 2, "Ãmerson Cavitchoni": 2, "Andresa Caldas": 2, "Bruna Salazar": 2, "Thuany Ghabril": 2, "Suzanny Mauren Dihelem": 1, "Laura FeijÃ³ Junqueira": 1, "Adalberto Neto": 1, "Felippe Porcella": 1, "Jhully Soares": 1}, "ag_fut_by_product": {"PJ360": 14, "SA": 12, "SF": 8, "GS": 6}, "perdidos_motivo": {"Sem perfil": 950, "Sem Retorno": 220, "Sem Contato": 208, "NÃ£o informado": 147, "Sem interesse": 99, "Duplicidade": 71, "Perfil Fake": 59, "Teste": 11, "Procurando emprego": 4, "MudanÃ§a de Prioridades": 3}, "perdidos_campaign": {"lead_lp_agro_abo_05-03": 376, "[LEAD] [FORMULÃRIO META] [AGRO] [16_03] [03]": 197, "FF | ABO [FORMULARIO DIRETO][FRANQUIA] ABO": 98, "02 - [FORM DIRETO][ABO]": 95, "lead_destino_lp_fiscal_27_03": 95, "[LEAD] [FORMULÃRIO META] [AGRO] [16_03] [04]": 83, "[FORM DIRETO][ABO]": 81, "FF | [CADASTRO][VIDEOS][FF] ABO": 60, "lead_lp_fiscal_abo_27_03": 57, "FF | [CADASTRO] [STUDIO AGRO]  [FUNDO FUNIL][2] ABO": 53}, "perdidos_etiqueta": {"Lead Studio Agro": 978, "Lead Studio Fiscal": 538, "Lead PJ360Âº": 227, "Sem etiqueta": 38, "Lead Partner": 1}, "leads_by_product": {"SF": 538, "SA": 978, "PJ360": 227, "Outro": 39}, "loss_rate_avg": 109.7, "qual_rate": 15.1, "q2a_rate": 51.3, "ag2re_rate": 59.0};
 
 Chart.defaults.color='#8b92a8';
 Chart.defaults.font.family="'Inter','Segoe UI',sans-serif";
@@ -237,9 +237,9 @@ Chart.defaults.font.size=11;
 Chart.defaults.borderColor='rgba(42,46,66,0.7)';
 const PAL={SA:'#3b82f6',SF:'#22c55e',PJ360:'#a855f7',GS:'#f59e0b'};
 
-// DYNAMIC DATE — show actual today regardless of data update date
+// DYNAMIC DATE â show actual today regardless of data update date
 const _now=new Date();
-const _todayFmt=String(_now.getDate()).padStart(2,'0')+'/'+ String(_now.getMonth()+1).padStart(2,'0');
+const _todayFmt=String(_now.getDate()).padStart(2,'0')+'/'+String(_now.getMonth()+1).padStart(2,'0');
 const _DAYS_DONE_TODAY=Math.min(D.total_days,D.labels.filter(l=>{
   const[d,m]=l.split('/');
   return new Date(2026,parseInt(m)-1,parseInt(d))<=_now;
@@ -254,28 +254,28 @@ D.closer_ideal_hoje=Math.round(D.meta_closer*_DAYS_DONE_TODAY/D.total_days);
 // PROGRESS
 const pct=Math.round(_DAYS_DONE_TODAY/D.total_days*100);
 document.getElementById('prog-bar').style.width=pct+'%';
-document.getElementById('prog-txt').textContent=`Progresso do mês: ${_DAYS_DONE_TODAY} de ${D.total_days} dias úteis`;
-document.getElementById('prog-pct').textContent=`${pct}% concluído`;
+document.getElementById('prog-txt').textContent=`Progresso do mÃªs: ${_DAYS_DONE_TODAY} de ${D.total_days} dias Ãºteis`;
+document.getElementById('prog-pct').textContent=`${pct}% concluÃ­do`;
 document.getElementById('today-lbl').textContent=`Hoje ${_todayFmt}`;
 (function(){const span=document.getElementById('today-lbl');const pctPos=(_DAYS_DONE_TODAY/D.total_days*100);span.style.position='absolute';span.style.left='calc('+pctPos+'% - 20px)';const track=document.querySelector('.prog-days');if(track)track.style.position='relative';})();
-document.getElementById('badge-dias').textContent=`${_DAYS_DONE_TODAY} dias feitos · ${D.total_days-_DAYS_DONE_TODAY} restantes`;
+document.getElementById('badge-dias').textContent=`${_DAYS_DONE_TODAY} dias feitos Â· ${D.total_days-_DAYS_DONE_TODAY} restantes`;
 document.getElementById('upd').textContent=`Atualizado: ${D.updated}`;
 document.getElementById('loss-avg').textContent=D.loss_rate_avg+'%';
 
 // CHIPS
 const chips=[
-  {l:'Qualificação',v:D.qual_rate+'%',d:'Leads → Qualificados'},
-  {l:'Qual → AG',v:D.q2a_rate+'%',d:'Qualificados → Agendamentos'},
-  {l:'AG → RE',v:D.ag2re_rate+'%',d:'Agendamentos → Realizadas'},
+  {l:'QualificaÃ§Ã£o',v:D.qual_rate+'%',d:'Leads â Qualificados'},
+  {l:'Qual â AG',v:D.q2a_rate+'%',d:'Qualificados â Agendamentos'},
+  {l:'AG â RE',v:D.ag2re_rate+'%',d:'Agendamentos â Realizadas'},
   {l:'Meta Leads',v:D.metas.leads.toLocaleString('pt-BR'),d:'Derivada da amostragem'},
   {l:'Meta AG',v:D.metas.ag.toLocaleString('pt-BR'),d:'CC1 Agendadas'},
   {l:'Meta RE',v:D.metas.re.toLocaleString('pt-BR'),d:'CC1 Realizadas'},
-  {l:'Perda Média',v:D.loss_rate_avg+'%',d:'Perdidos ÷ Leads/dia',w:true},
+  {l:'Perda MÃ©dia',v:D.loss_rate_avg+'%',d:'Perdidos Ã· Leads/dia',w:true},
 ];
 document.getElementById('chips').innerHTML=chips.map(r=>`<div class="chip"><div class="cl">${r.l}</div><div class="cv" style="${r.w?'color:var(--red)':''}">${r.v}</div><div class="cd">${r.d}</div></div>`).join('');
 
 // KPI
-function kS(a,i){const r=a/i;return r>=.95?['ahead','▲ No ritmo']:r>=.75?['warn','⚠ Abaixo']:['behind','▼ Muito atrás']}
+function kS(a,i){const r=a/i;return r>=.95?['ahead','â² No ritmo']:r>=.75?['warn','â  Abaixo']:['behind','â¼ Muito atrÃ¡s']}
 const kCards=[
   {l:'Leads',c:'var(--teal)',a:D.totais.leads,m:D.metas.leads,i:D.ideal_hoje.leads,proj:D.pace_proj.leads,r:D.ritmo_diario.leads,pace:D.pace_atual.leads+'/dia'},
   {l:'Leads MQL',c:'var(--teal)',a:D.totais.mql,m:D.metas.mql,i:D.ideal_hoje.mql,proj:Math.round(D.totais.mql/D.days_done*D.total_days),r:null,pace:Math.round(D.totais.mql/D.days_done)+'/dia'},
@@ -286,7 +286,7 @@ const kCards=[
 ];
 document.getElementById('kgrid').innerHTML=kCards.map(k=>{
   const fp=k.m?Math.min(100,Math.round(k.a/k.m*100)):null;
-  const[sc,st]=k.i?kS(k.a,k.i):['behind','⚠ Monitorar'];
+  const[sc,st]=k.i?kS(k.a,k.i):['behind','â  Monitorar'];
   return `<div class="kcard" style="--c:${k.c}">
     <div class="kl">${k.l}</div>
     <div class="km"><div class="kv">${k.a.toLocaleString('pt-BR')}</div>${k.m?`<div class="ks">/ ${k.m.toLocaleString('pt-BR')}</div>`:''}</div>
@@ -294,8 +294,8 @@ document.getElementById('kgrid').innerHTML=kCards.map(k=>{
     <div class="kr">
       <div class="krow"><span>Pace atual</span><span class="neutral">${k.pace}</span></div>
       ${k.i?`<div class="krow"><span>${k.iLabel||'Ideal hoje'}</span><span>${k.i.toLocaleString('pt-BR')}</span></div>`:''}
-      ${k.proj?`<div class="krow"><span>Projeção</span><span class="${k.proj>=k.m?'ahead':'behind'}">${k.proj.toLocaleString('pt-BR')}</span></div>`:''}
-      ${k.r?`<div class="krow"><span>${k.rLabel||'Ritmo necessário'}</span><span class="warn">${k.r}/dia</span></div>`:''}
+      ${k.proj?`<div class="krow"><span>ProjeÃ§Ã£o</span><span class="${k.proj>=k.m?'ahead':'behind'}">${k.proj.toLocaleString('pt-BR')}</span></div>`:''}
+      ${k.r?`<div class="krow"><span>${k.rLabel||'Ritmo necessÃ¡rio'}</span><span class="warn">${k.r}/dia</span></div>`:''}
       ${k.ns?`<div class="krow"><span>Taxa de perda</span><span class="behind">${D.loss_rate_avg}% dos leads</span></div>`:''}
       <div class="krow" style="margin-top:4px"><span>Status</span><span class="${sc}">${st}</span></div>
     </div>
@@ -313,7 +313,7 @@ function lineChart(id,datasets,labels){
         datalabels:{
           display:(ctx)=>ctx.dataset.data[ctx.dataIndex]!=null&&ctx.datasetIndex===0,
           formatter:v=>v!=null?v.toLocaleString('pt-BR'):null,
-          anchor:'end',align:'top',color:'#e2e8f0',
+          anchor:'end',align:'top',color:##e2e8f0',
           font:{size:9,weight:'bold'},offset:-2,clip:false
         }
       },
@@ -338,7 +338,7 @@ lineChart('ch-mql',[
   {label:'Meta MQL (600)',data:D.series.mql_target,borderColor:'#475569',borderDash:[5,4],borderWidth:1.5,pointRadius:0}
 ],D.labels);
 
-// VOLUME DIÁRIO — with datalabels
+// VOLUME DIÃRIO â with datalabels
 new Chart(document.getElementById('ch-daily'),{
   type:'bar',plugins:[ChartDataLabels],
   data:{labels:D.labels,datasets:[
@@ -358,7 +358,7 @@ function hBar(id,obj,color){
   const maxVal=Math.max(...values);
   new Chart(document.getElementById(id),{
     type:'bar',plugins:[ChartDataLabels],
-    data:{labels,datasets:[{label:'Total',data:values,backgroundColor:color+'99',borderColor:color,borderWidth:1,borderRadius:3}]},
+    data:{labels,datasets:[{label:'Total',data:values,backgroundColor:color+99,borderColor:color,borderWidth:1,borderRadius:3}]},
     options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
       layout:{padding:{right:32,top:4,bottom:4}},
       plugins:{legend:{display:false},tooltip:{mode:'index'},
@@ -372,7 +372,7 @@ function hBar(id,obj,color){
   });
 }
 
-// STACKED HORIZONTAL BAR — pace RE com projeção de futuras
+// STACKED HORIZONTAL BAR â pace RE com projeÃ§Ã£o de futuras
 function hBarStacked(id,lbl1,data1,lbl2,data2,col1,col2){
   const all=new Set([...Object.keys(data1),...Object.keys(data2)]);
   const sorted=[...all].sort((a,b)=>{
@@ -398,7 +398,7 @@ function hBarStacked(id,lbl1,data1,lbl2,data2,col1,col2){
         datalabels:{anchor:'end',align:'right',color:'#e2e8f0',font:{size:10,weight:'bold'},
           formatter:(v,ctx)=>{
             if(ctx.datasetIndex===1){
-              return totals[ctx.dataIndex]>0?'→ '+totals[ctx.dataIndex]:null;
+              return totals[ctx.dataIndex]>0?'â '+totals[ctx.dataIndex]:null;
             }
             return v>0?v:null;
           },
@@ -413,7 +413,7 @@ hBar('ch-sdr-ag',D.ag_by_sdr,'#6366f1');
 hBar('ch-sdr-agfut',D.ag_fut_by_sdr,'#a855f7');
 hBar('ch-sdr-re',D.re_by_sdr,'#22c55e');
 hBar('ch-sdr-ns',D.ns_by_sdr,'#f59e0b');
-// ── Closer pace vs meta 40 ─────────────────────────────────────────────
+// ââ Closer pace vs meta 40 âââââââââââââââââââââââââââââââââââââââââââââ
 (function(){
   const META=40, IDEAL=Math.round(META*_DAYS_DONE_TODAY/D.total_days);
   document.getElementById('closer40-ideal-span').textContent=IDEAL;
@@ -440,7 +440,7 @@ hBar('ch-sdr-ns',D.ns_by_sdr,'#f59e0b');
     data:{labels:sorted,datasets:[
       {label:'RE Realizadas',data:vRe,backgroundColor:'#22c55ecc',borderColor:'#22c55e',borderWidth:1,borderRadius:2},
       {label:'Futuras Agendadas',data:vFut,backgroundColor:'#a855f755',borderColor:'#a855f7',borderWidth:1,borderRadius:2},
-      {label:'Gap até meta 40',data:vGap,backgroundColor:'#ffffff11',borderColor:'#ffffff22',borderWidth:1,borderRadius:2}
+      {label:'Gap atÃ© meta 40',data:vGap,backgroundColor:'#ffffff11',borderColor:'#ffffff22',borderWidth:1,borderRadius:2}
     ]},
     options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
       layout:{padding:{right:50,top:4,bottom:4}},
@@ -449,13 +449,13 @@ hBar('ch-sdr-ns',D.ns_by_sdr,'#f59e0b');
         tooltip:{mode:'index',callbacks:{footer:items=>{
           const i=items[0].dataIndex;
           const needed=Math.max(0,Math.ceil((META-vRe[i])/(D.days_left||1)));
-          return['Projeção: '+totals[i]+' / '+META,'Necessário/dia: '+needed];
+          return['ProjeÃ§Ã£o: '+totals[i]+' / '+META,'NecessÃ¡rio/dia: '+needed];
         }}},
         datalabels:{anchor:'end',align:'right',
           color:(ctx)=>ctx.datasetIndex===0?'#22c55e':ctx.datasetIndex===1?'#a855f7':'transparent',
           font:{size:10,weight:'bold'},
           formatter:(v,ctx)=>{
-            if(ctx.datasetIndex===1){const tot=totals[ctx.dataIndex];return tot>0?'→ '+tot:null;}
+            if(ctx.datasetIndex===1){const tot=totals[ctx.dataIndex];return tot>0?'â '+tot:null;}
             return v>0?v:null;
           },padding:{left:4},clip:false}},
       scales:{
@@ -466,11 +466,11 @@ hBar('ch-sdr-ns',D.ns_by_sdr,'#f59e0b');
   });
 })();
 
-// ── Closer pace vs meta 70 ──────────────────────────────────────────────
+// ââ Closer pace vs meta 70 ââââââââââââââââââââââââââââââââââââââââââââââ
 (function(){
   const META=D.meta_sdr, IDEAL=Math.round(D.meta_sdr*_DAYS_DONE_TODAY/D.total_days);
   document.getElementById('closer-ideal-span').textContent=IDEAL;
-  document.querySelector('#ch-closer-meta').closest('.cc').querySelector('.ct').textContent='Realizadas + Futuras vs Meta ('+META+') — Ideal hoje: '+IDEAL;
+  document.querySelector('#ch-closer-meta').closest('.cc').querySelector('.ct').textContent='Realizadas + Futuras vs Meta ('+META+') â Ideal hoje: '+IDEAL;
   const allC=new Set([...Object.keys(D.re_by_sdr),...Object.keys(D.ag_fut_by_sdr)]);
   const sorted=[...allC].sort((a,b)=>{
     const ta=(D.re_by_sdr[a]||0)+(D.ag_fut_by_sdr[a]||0);
@@ -512,7 +512,7 @@ hBar('ch-sdr-ns',D.ns_by_sdr,'#f59e0b');
       datasets:[
         {label:'RE Realizadas',data:vRe,backgroundColor:'#22c55ecc',borderColor:'#22c55e',borderWidth:1,borderRadius:2},
         {label:'Futuras Agendadas',data:vFut,backgroundColor:'#a855f755',borderColor:'#a855f7',borderWidth:1,borderRadius:2},
-        {label:'Gap até meta '+META,data:vGap,backgroundColor:'#ffffff11',borderColor:'#ffffff22',borderWidth:1,borderRadius:2}
+        {label:'Gap atÃ© meta '+META,data:vGap,backgroundColor:'#ffffff11',borderColor:'#ffffff22',borderWidth:1,borderRadius:2}
       ]
     },
     options:{
@@ -525,7 +525,7 @@ hBar('ch-sdr-ns',D.ns_by_sdr,'#f59e0b');
             const i=items[0].dataIndex;
             const proj=totals[i];
             const needed=Math.max(0,Math.ceil((META-vRe[i])/(D.days_left||1)));
-            return [`Projeção: ${proj} / ${META}`,`Necessário/dia: ${needed}`];
+            return [`ProjeÃ§Ã£o: ${proj} / ${META}`,`NecessÃ¡rio/dia: ${needed}`];
           }
         }},
         datalabels:{
@@ -535,7 +535,7 @@ hBar('ch-sdr-ns',D.ns_by_sdr,'#f59e0b');
           formatter:(v,ctx)=>{
             if(ctx.datasetIndex===1){
               const tot=totals[ctx.dataIndex];
-              return tot>0?'→ '+tot:null;
+              return tot>0?'â '+tot:null;
             }
             return v>0?v:null;
           },
@@ -584,7 +584,7 @@ const sdrs=Object.keys(sp).sort((a,b)=>{
 let tbl=`<table class="ctable"><tr><th>SDR</th><th>Total AG</th>${prods.map(p=>`<th style="color:${PAL[p]||'#64748b'}">${p}</th>`).join('')}</tr>`;
 sdrs.forEach(s=>{
   const pd=sp[s];const tot=Object.values(pd).reduce((a,b)=>a+b,0);
-  tbl+=`<tr><td><strong>${s}</strong></td><td><strong>${tot}</strong></td>${prods.map(p=>{const v=pd[p]||0;return`<td>${v>0?`<span class="pt pt-${p}">${v}</span>`:'<span style="color:#475569">—</span>'}</td>`;}).join('')}</tr>`;
+  tbl+=`<tr><td><strong>${s}</strong></td><td><strong>${tot}</strong></td>${prods.map(p=>{const v=pd[p]||0;return`<td>${v>0?`<span class="pt pt-${p}">${v}</span>`:'<span style="color:#475569">â</span>'}</td>`;}).join('')}</tr>`;
 });
 document.getElementById('sdr-table').innerHTML=tbl+'</table>';
 
@@ -611,7 +611,7 @@ new Chart(document.getElementById('ch-camp'),{
     scales:{x:{grid:{color:'rgba(42,46,66,0.6)'},beginAtZero:true,max:230},y:{grid:{display:false},ticks:{font:{size:9}}}}}
 });
 
-// PERDIDOS ACUMULADOS + AG + LEADS — com % dos leads
+// PERDIDOS ACUMULADOS + AG + LEADS â com % dos leads
 new Chart(document.getElementById('ch-perdacu'),{
   type:'line',plugins:[ChartDataLabels],
   data:{labels:D.labels,datasets:[
@@ -621,7 +621,7 @@ new Chart(document.getElementById('ch-perdacu'),{
   ]},
   options:{responsive:true,maintainAspectRatio:true,
     plugins:{
-      legend:{position:'bottom',labels:{boxWidth:10,padding:10,font:{size:10}}},
+      legend:{position8'bottom',labels:{boxWidth:10,padding:10,font:{size:10}}},
       tooltip:{mode:'index'},
       datalabels:{
         display:(ctx)=>{
@@ -642,11 +642,11 @@ new Chart(document.getElementById('ch-perdacu'),{
     scales:{x:{grid:{color:'rgba(42,46,66,0.6)'},ticks:{maxRotation:45,font:{size:10}}},y:{grid:{color:'rgba(42,46,66,0.6)'},beginAtZero:true}}}
 });
 
-// LEADS vs PERDIDOS POR PRODUTO — grouped bar
+// LEADS vs PERDIDOS POR PRODUTO â grouped bar
 (function(){
   const prds=['SA','SF','PJ360'];
   const lByPrd=prds.map(p=>D.leads_by_product[p]||0);
-  const pByPrd=prds.map(p=>D.perdidos_etiqueta[p==='SA'?'Lead Studio Agro':p==='SF'?'Lead Studio Fiscal':'Lead PJ360º']||0);
+  const pByPrd=prds.map(p=>D.perdidos_etiqueta[p==='SA'?'Lead Studio Agro':p==='SF'?'Lead Studio Fiscal':'Lead PJ360Âº']||0);
   new Chart(document.getElementById('ch-prod-compare'),{
     type:'bar',plugins:[ChartDataLabels],
     data:{labels:prds,datasets:[
@@ -676,7 +676,7 @@ new Chart(document.getElementById('ch-perdacu'),{
   });
 })();
 
-// ÁREA PERDIDOS POR PRODUTO vs LEADS — com % dos leads
+// ÃREA PERDIDOS POR PRODUTO vs LEADS â com % dos leads
 new Chart(document.getElementById('ch-prodarea'),{
   type:'line',plugins:[ChartDataLabels],
   data:{labels:D.labels,datasets:[
